@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 #import "NimbusModels.h"
 
 @interface FileObject : NSObject <NICellObject>
@@ -15,5 +16,7 @@
 @property (nonatomic, strong) NSDate *uploadTime;
 @property (nonatomic, strong) NSString *fbName;
 @property (nonatomic, strong) NSString *fbID;
+
+-(id)initWithParseObject:(PFObject *)parseObject;
 
 @end

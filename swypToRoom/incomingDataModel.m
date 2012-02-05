@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 ExoMachina. All rights reserved.
 //
 
-#import "incomingDataModel.h"
+#import "IncomingDataModel.h"
+#import "FileObject.h"
 
 @implementation IncomingDataModel
 
@@ -35,6 +36,9 @@
     [query whereKey:@"location" nearGeoPoint:currentLocation];
     query.limit = [NSNumber numberWithInt:20];
     
+    for (PFObject *item in [query findObjects]){
+        [self.items addObject:[[FileObject alloc] initWithParseObject:item]];
+    }
     [self.items addObjectsFromArray:[query findObjects]];
     
     NSLog(@"%@", self.items);
