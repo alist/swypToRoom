@@ -29,6 +29,7 @@
 	
 	_swypWorkspace			=	[[swypWorkspaceViewController alloc] init];
 	_outgoingDataManager	=	[[SROutgoingDataManager alloc] init];
+	[_swypWorkspace setContentDataSource:_outgoingDataManager];
 	
 	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG setAlpha:1];
