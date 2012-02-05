@@ -7,6 +7,7 @@
 //
 
 #import "SRAppDelegate.h"
+#import "SRCloudVC.h"
 
 @implementation SRAppDelegate
 
@@ -19,6 +20,7 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+	[self.window setRootViewController:[[SRCloudVC alloc] init]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
