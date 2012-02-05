@@ -12,6 +12,7 @@
 
 @implementation FileCell
 @synthesize nwImgView, nameLabel, dateLabel;
+@synthesize fbImgView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -25,6 +26,10 @@
 		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectMake(0, 0, 100, 100)];
 		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
 		[self addSubview:self.nwImgView];
+        
+        self.fbImgView = [[NINetworkImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+        [self.fbImgView setScaleOptions:NINetworkImageViewScaleToFitCropsExcess];
+        [self addSubview:fbImgView];
 
 		self.nameLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
         self.nameLabel.highlightedTextColor = [UIColor whiteColor];
@@ -56,6 +61,8 @@
 
 - (BOOL)shouldUpdateCellWithObject:(FileObject *)object {
 	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
+    [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
+                                           object.fbID]];
 	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]]];
 	//find the .
 //	NSArray * fullScreen	=	[[object fileName] ];
