@@ -11,7 +11,7 @@
 #import "NSDate+Relative.h"
 
 @implementation FileCell
-@synthesize nwImgView, nameLabel, dateLabel;
+@synthesize nwImgView, nameLabel, dateLabel, usernameLabel;
 @synthesize fbImgView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -31,21 +31,25 @@
         [self.fbImgView setScaleOptions:NINetworkImageViewScaleToFitCropsExcess];
         [self addSubview:fbImgView];
 
-		self.nameLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
+		self.nameLabel			=	[[UILabel alloc] initWithFrame:CGRectMake(120, 30, 200, 20)];
         self.nameLabel.highlightedTextColor = [UIColor whiteColor];
 		[self.nameLabel setTextAlignment:UITextAlignmentLeft];
 		[self.nameLabel setFont:[UIFont fontWithName:@"futura" size:16]];
-		self.nameLabel.frame	=	CGRectMake(120, 30, 200, 20);
-		[self.nameLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
+		[self.nameLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
 		[self addSubview:self.nameLabel];
 
-		self.dateLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
+		self.dateLabel			=	[[UILabel alloc] initWithFrame:CGRectMake(120, 8, 192, 20)];
+        self.dateLabel.textColor = [UIColor grayColor];
         self.dateLabel.highlightedTextColor = [UIColor whiteColor];
-		[self.dateLabel setTextAlignment:UITextAlignmentLeft];
-		[self.dateLabel setFont:[UIFont fontWithName:@"futura" size:14]];
-		self.dateLabel.frame	=	CGRectMake(120, 54, 200, 20);
+		[self.dateLabel setTextAlignment:UITextAlignmentRight];
+		[self.dateLabel setFont:[UIFont fontWithName:@"futura" size:12]];
 		[self.dateLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
 		[self addSubview:self.dateLabel];
+        
+        self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 52, 200, 20)];
+        [self.usernameLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
+        [self.nameLabel setFont:[UIFont fontWithName:@"futura" size:14]];
+        [self addSubview:self.dateLabel];
 		
 		[self setBackgroundView:bgView];
     }
@@ -72,10 +76,11 @@
 	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
     [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fbID]];
-	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]]];
-
-    NSString *fileName = [[[[object fileName] componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-	[self.nameLabel setText:[NSString stringWithFormat:@"%@", fileName]];
+   self.usernameLabel.text = object.fbName;
+	self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]];
+    NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] lastObject] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
+    return YES;
 }
 
 - (void)updateCellWithSavedRoomObject:(SavedRoomObject*)object{

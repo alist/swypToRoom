@@ -14,6 +14,7 @@
 
 
 @interface FileCell : UITableViewCell <NICell>
+
 @property (nonatomic, strong) NINetworkImageView * nwImgView;
 @property (nonatomic, strong) NINetworkImageView * fbImgView;
 @property (nonatomic, strong) UILabel * nameLabel;
@@ -21,4 +22,6 @@
 
 - (void)updateCellWithSavedRoomObject:(SavedRoomObject*)object;
 - (void)updateCellWithFileObject:(FileObject*)object;
+@property (nonatomic, strong) UILabel * usernameLabel;
+
 @end
