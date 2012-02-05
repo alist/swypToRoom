@@ -9,12 +9,15 @@
 #import "SRCloudVC.h"
 #import "IncomingDataModel.h"
 #import <Parse/Parse.h>
+#import "FileObject.h"
 
 @implementation SRCloudVC
 
 @synthesize mapBG = _mapBG, swypRoomContentTV = _swypRoomContentTV, swypActivateButton = _swypActivateButton;
 @synthesize swypWorkspace = _swypWorkspace, outgoingDataManager = _outgoingDataManager;
-@synthesize incomingDataModel = _incomingDataModel, locationManager = _locationManager;
+@synthesize locationManager = _locationManager;
+@synthesize sectionedDataModel = _sectionedDataModel;
+@synthesize fetchedRoomObjects = _fetchedRoomObjects;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
 	if (self = [super initWithNibName:nil bundle:nil]){
@@ -25,6 +28,44 @@
 
 -(void) activateSwypButtonPressed:(id)sender{
 	[[self swypWorkspace] presentContentWorkspaceAtopViewController:self];
+}
+
+-(NITableViewModel*) sectionedDataModel{
+	if (_sectionedDataModel == nil){
+		NSMutableArray	* sectionArray	=	[[NSMutableArray alloc] init];
+		
+		[sectionArray addObject:LocStr(@"Nearby files", @"on main file screen")];
+		[sectionArray addObjectsFromArray:[self fetchedRoomObjects]];
+		_sectionedDataModel	=	[[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:(id)[NICellFactory class]];
+	}
+	return _sectionedDataModel;
+}
+
+-(void) beginFetchingPFItems{
+	@autoreleasepool {
+		
+		PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
+
+		PFQuery *query = [PFQuery queryWithClassName:@"RoomObject"];
+		[query whereKey:@"location" nearGeoPoint:geoPoint];
+		query.limit = [NSNumber numberWithInt:20];
+		
+		NSMutableArray * parseObjectItemArray	=	[NSMutableArray array];
+		for (PFObject *item in [query findObjects]){
+			[parseObjectItemArray addObject:[[FileObject alloc] initWithParseObject:item]];
+		}
+		
+		[self performSelectorOnMainThread:@selector(setFetchedRoomObjects:) withObject:parseObjectItemArray waitUntilDone:TRUE];
+	}
+}
+
+-(void) setFetchedRoomObjects:(NSArray *)fetchedRoomObjects{
+	_fetchedRoomObjects = fetchedRoomObjects;
+	if (_fetchedRoomObjects){
+		_sectionedDataModel = nil;
+		[[self swypRoomContentTV] setDataSource:[self sectionedDataModel]];
+		[[self swypRoomContentTV] reloadData];
+	}
 }
 
 -(void) viewDidLoad{
@@ -49,15 +90,11 @@
 	
 	//add tableview here
     
-    _incomingTableView		=	[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
-	[_incomingTableView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.85]];
-	[_incomingTableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-    
-    self.incomingDataModel = [[IncomingDataModel alloc] initWithDelegate:(id)[NICellFactory class]];
-    
-    
-    [_incomingTableView setDataSource:self.incomingDataModel];
-    [self.view addSubview:_incomingTableView];
+    _swypRoomContentTV		=	[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
+	[_swypRoomContentTV setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.85]];
+	[_swypRoomContentTV setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+        
+	[self.view addSubview:_swypRoomContentTV];
     
     // activate swyp
 	
@@ -99,9 +136,7 @@
     
     NSLog(@"Updated location.");
     
-    CLLocationCoordinate2D coord = newLocation.coordinate;
-    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coord.latitude longitude:coord.longitude];
-    [self.incomingDataModel fetchFilesNear:geoPoint];
+	[NSThread detachNewThreadSelector:@selector(beginFetchingPFItems) toTarget:self withObject:nil];
 }
 
 - (void)locationManager:(CLLocationManager *)manager

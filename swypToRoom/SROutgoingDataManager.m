@@ -164,6 +164,7 @@
 	
 }
 
+
 #pragma mark - private
 -(UIImage*)	_generateIconImageForImageData:(NSData*)imageData maxSize:(CGSize)maxSize{
 	UIImage * loadImage		=	[[UIImage alloc] initWithData:imageData];
