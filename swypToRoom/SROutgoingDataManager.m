@@ -43,7 +43,7 @@
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
 	[newObject setObjectIcon:iconImage]; 
 	[newObject setObjectUTI:mime];
-	[newObject setObjectName:mime];
+	[newObject setObjectName:[@"file." stringByAppendingString:[mime stringByReplacingOccurrencesOfString:@"/" withString:@"_"]]];
 	[newObject setObjectData:objectData];
 	
 	NSString * newId = [self _generateUniqueContentID];
@@ -57,19 +57,34 @@
 	EXOLog(@"Adding object to room! %@",[object objectUTI]);
 	PFObject * newRoomObject	=	[PFObject objectWithClassName:@"RoomObject"];
 	PFFile * objectFile			=	[PFFile fileWithName:[object objectName] data:[object objectData]];
-	[newRoomObject setObject:objectFile forKey:@"file"];
-	PFFile * thumbail			=	[PFFile fileWithData:UIImageJPEGRepresentation([object objectIcon], .9)];
-	[newRoomObject setObject:thumbail forKey:@"thumbnail"];
+	PFFile * thumbail			=	[PFFile fileWithName:@"thumbnail.jpg" data:UIImageJPEGRepresentation([object objectIcon], .9)];
 	CLLocation * lastLocation	=	[[self locationManager] location];
 	PFGeoPoint * thisGeo		=	[PFGeoPoint geoPointWithLatitude:lastLocation.coordinate.latitude longitude:lastLocation.coordinate.latitude];
-	[objectFile setValue:thisGeo forKey:@"location"];
-	[newRoomObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+	[newRoomObject setObject:thisGeo forKey:@"location"];
+
+	[objectFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 		if (succeeded){
-			EXOLog(@"Uploaded successfully of type %@!", [object objectName]);
+			[thumbail saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+				if (succeeded){
+					[newRoomObject setObject:objectFile forKey:@"file"];
+					[newRoomObject setObject:thumbail forKey:@"thumbnail"];
+					[newRoomObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+						if (succeeded){
+							EXOLog(@"Uploaded successfully of type %@!", [object objectName]);
+						}else{
+							EXOLog(@"Failed upload of %@ with error %@", [object objectName], [error description]);
+						}
+					}];
+				}else{
+					EXOLog(@"Failed upload thumbail for %@ with error %@", [object objectName], [error description]);
+				}
+			}];
+			
 		}else{
-			EXOLog(@"Failed upload of %@ with error %@", [object objectName], [error description]);
+			EXOLog(@"Failed upload objectFile for %@ with error %@", [object objectName], [error description]);
 		}
 	}];
+	
 }
 
 
@@ -140,7 +155,7 @@
 		[newObject setObjectIcon:[self _generateIconImageForImageData:streamData maxSize:CGSizeMake(200, 200)]]; 
 		[newObject setObjectUTI:[discernedStream streamType]];
 		[newObject setObjectData:streamData];
-		[newObject setObjectName:[discernedStream streamType]];
+		[newObject setObjectName:[@"file." stringByAppendingString:[[discernedStream streamType] stringByReplacingOccurrencesOfString:@"/" withString:@"_"]]];
 		
 		NSString * newId = [self _generateUniqueContentID];
 		[_outgoingObjectsByID setValue:newObject forKey:newId];
