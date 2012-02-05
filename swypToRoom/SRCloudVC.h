@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "NimbusModels.h"
 
-@interface SRCloudVC : UIViewController <UITableViewDelegate, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate> {
+@interface SRCloudVC : UIViewController <UITableViewDelegate, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate,UIDocumentInteractionControllerDelegate> {
 }
 
 @property (nonatomic,  strong) MKMapView*	mapBG;

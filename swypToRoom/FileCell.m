@@ -79,7 +79,7 @@
 }
 
 - (void)updateCellWithFileObject:(FileObject*)object{
-	self.accessoryType = UITableViewCellAccessoryNone;
+//	self.accessoryType = UITableViewCellAccessoryNone;
 	
 	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
     [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
@@ -88,11 +88,10 @@
 	self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]];
     NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] lastObject] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
-    return YES;
 }
 
 - (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object{
-	self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+//	self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
 	
 	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
 

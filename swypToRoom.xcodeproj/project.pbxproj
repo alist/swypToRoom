@@ -79,6 +79,7 @@
 		79527C3414DEABDB003002AF /* swypToRoom-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 79527C3114DEABDB003002AF /* swypToRoom-57.png */; };
 		79527C3514DEABDB003002AF /* swypToRoom-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 79527C3214DEABDB003002AF /* swypToRoom-72.png */; };
 		79527C3614DEABDB003002AF /* swypToRoom-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 79527C3314DEABDB003002AF /* swypToRoom-114.png */; };
+		79527C4F14DEC02B003002AF /* NIWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 79527C4E14DEC02B003002AF /* NIWebController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +217,10 @@
 		79527C3114DEABDB003002AF /* swypToRoom-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypToRoom-57.png"; sourceTree = "<group>"; };
 		79527C3214DEABDB003002AF /* swypToRoom-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypToRoom-72.png"; sourceTree = "<group>"; };
 		79527C3314DEABDB003002AF /* swypToRoom-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypToRoom-114.png"; sourceTree = "<group>"; };
+		79527C4B14DEC02B003002AF /* NimbusWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NimbusWebController.h; path = nimbus/src/webcontroller/src/NimbusWebController.h; sourceTree = SOURCE_ROOT; };
+		79527C4C14DEC02B003002AF /* NimbusWebController+Namespace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NimbusWebController+Namespace.h"; path = "nimbus/src/webcontroller/src/NimbusWebController+Namespace.h"; sourceTree = SOURCE_ROOT; };
+		79527C4D14DEC02B003002AF /* NIWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIWebController.h; path = nimbus/src/webcontroller/src/NIWebController.h; sourceTree = SOURCE_ROOT; };
+		79527C4E14DEC02B003002AF /* NIWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIWebController.m; path = nimbus/src/webcontroller/src/NIWebController.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +350,7 @@
 		7932E6D614DE1EFE00E1A017 /* nimbus */ = {
 			isa = PBXGroup;
 			children = (
+				79527C5014DEC030003002AF /* web src */,
 				7932E72414DE1F4B00E1A017 /* models src */,
 				7932E71B14DE1F2B00E1A017 /* networkimage source */,
 				7932E6D714DE1F1A00E1A017 /* core src */,
@@ -493,6 +499,17 @@
 			name = "View Controller";
 			sourceTree = "<group>";
 		};
+		79527C5014DEC030003002AF /* web src */ = {
+			isa = PBXGroup;
+			children = (
+				79527C4B14DEC02B003002AF /* NimbusWebController.h */,
+				79527C4C14DEC02B003002AF /* NimbusWebController+Namespace.h */,
+				79527C4D14DEC02B003002AF /* NIWebController.h */,
+				79527C4E14DEC02B003002AF /* NIWebController.m */,
+			);
+			name = "web src";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -627,6 +644,7 @@
 				7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */,
 				79350A9014DE884100F2243C /* SRSavedRoomFile.m in Sources */,
 				3E4D0BEB14DE88FC00673CE4 /* NSDate+Relative.m in Sources */,
+				79527C4F14DEC02B003002AF /* NIWebController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

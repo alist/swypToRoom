@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "FileObject.h"
 #import "SRSavedRoomFile.h"
+#import "NIWebController.h"
 
 @implementation SRCloudVC
 
@@ -209,7 +210,7 @@
 	return height;
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+	[tableView deselectRowAtIndexPath:indexPath animated:TRUE];
 	if (indexPath.section == 0){
 		//instantiate a download
 		SRSavedRoomFile * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomFile" inManagedObjectContext:[self objectContext]];
@@ -217,7 +218,48 @@
 		[UIView animateWithDuration:1 animations:^{;} completion:^(BOOL completed){
 			[[self swypRoomContentTV] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition: UITableViewScrollPositionTop animated:TRUE];
 		}];
+	}else{
+		SRSavedRoomFile * oldRoomObject = [(NITableViewModel*)[tableView dataSource] objectAtIndexPath:indexPath];
+		EXOLog(@"OldRoomObject type: %@ name:%@",[oldRoomObject fileType], [oldRoomObject fileName]);
+
+		NSURL * writeURL = [NSURL URLWithString:[NSTemporaryDirectory() stringByAppendingPathComponent:[oldRoomObject fileName]]];
+		[[NSFileManager new] createFileAtPath:[writeURL absoluteString] contents:[oldRoomObject fileData] attributes:nil];
+		
+		UIDocumentInteractionController * documentControl = nil;
+		@try {
+			documentControl =  [UIDocumentInteractionController interactionControllerWithURL:writeURL];
+		}
+		@catch (NSException *exception) {
+			EXOLog(@"Not supported file type at URL %@, dude! %@",[writeURL description],[oldRoomObject fileType]);
+		}
+
+		if (documentControl == nil){
+			
+			UIViewController * viewToWrapWebView = [[UIViewController alloc] init];
+			[viewToWrapWebView setTitle:LocStr(@"File View",@"quickviewed")];
+			UIWebView * webView = [UIWebView new];
+			[webView setScalesPageToFit:TRUE];
+			[viewToWrapWebView setView:webView];
+			[webView sizeToFit];
+			[webView loadData:[oldRoomObject fileData] MIMEType:[oldRoomObject fileType] textEncodingName:@"utf-8" baseURL:nil];
+
+			[[self navigationController] pushViewController:viewToWrapWebView animated:TRUE];
+						
+		}else{
+		
+			[documentControl setDelegate:self];
+			
+			if ([documentControl UTI] != nil){
+				[documentControl presentPreviewAnimated:TRUE];
+			}else{
+				[documentControl presentOptionsMenuFromRect:[[self swypRoomContentTV] rectForRowAtIndexPath:indexPath] inView:self.view animated:FALSE];
+			}
+		}
 	}
+}
+
+- (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller{
+	return self;
 }
 
 #pragma mark NSFetchedResultsController

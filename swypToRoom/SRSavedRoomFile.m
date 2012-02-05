@@ -31,12 +31,18 @@
 	[self setFileName:[object fileName]];
 	NSArray * components =	[[object fileName] componentsSeparatedByString:@"."];
 
-	NSString * fileName	=	nil;
+	NSString * fileType	=	nil;
 	if ([components count] == 2){
-		fileName	=	[[components objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+		fileType	=	[[components objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+
+//		NSArray * possibleComponents =	[fileType componentsSeparatedByString:@"/"];
+//		if ([possibleComponents count] > 1){
+//			fileType = [possibleComponents objectAtIndex:1];
+//		}
+		
+//		[self setFileName:[[components objectAtIndex:0] stringByAppendingFormat:@".%@",fileType]];
 	} 
-	
-	[self setFileType:fileName];
+	[self setFileType:fileType];
 	
 	if (StringHasText([object fileURL]) && StringHasText([object thumbnailURL])){
 		[NSThread detachNewThreadSelector:@selector(_fetchDataFromURLSInDictionary:) toTarget:self withObject:[NSDictionary dictionaryWithObjectsAndKeys:[object thumbnailURL],@"thumb",[object fileURL],@"file", nil]];
