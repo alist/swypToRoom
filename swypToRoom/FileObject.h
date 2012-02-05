@@ -17,14 +17,17 @@
  [parseObject objectForKey:@"file"] -- pffile
  [parseObject objectForKey:@"thumbnail"] --pffile
  [parseObject objectForKey:@"location"] -- pfgeo
+ [newRoomObject setObject:[[PFUser currentUser] facebookId] forKey:@"userFBId"];
  */
 
 @interface FileObject : NSObject <NICellObject>
 
 @property (nonatomic, strong) NSString *fileName;
-@property (nonatomic, strong) NSDate *uploadTime;
+@property (nonatomic, strong) NSDate * uploadTime;
 @property (nonatomic, strong) NSString *fbName;
 @property (nonatomic, strong) NSString *fbID;
+@property (nonatomic, strong) NSString *thumbnailURL;
+@property (nonatomic, strong) NSString *fileURL;
 
 -(id)initWithParseObject:(PFObject *)parseObject;
 

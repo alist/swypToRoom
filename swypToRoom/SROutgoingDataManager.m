@@ -62,6 +62,7 @@
 	PFGeoPoint * thisGeo		=	[PFGeoPoint geoPointWithLatitude:lastLocation.coordinate.latitude longitude:lastLocation.coordinate.latitude];
 	[newRoomObject setObject:thisGeo forKey:@"location"];
 	[newRoomObject setObject:[PFUser currentUser] forKey:@"user"];
+	[newRoomObject setObject:[[PFUser currentUser] facebookId] forKey:@"userFBId"];
 
 	[objectFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 		if (succeeded){

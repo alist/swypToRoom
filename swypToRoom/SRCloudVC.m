@@ -90,6 +90,7 @@
 	//add tableview here
     
     _swypRoomContentTV		=	[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
+	[_swypRoomContentTV setDelegate:self];
 	[_swypRoomContentTV setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.85]];
 	[_swypRoomContentTV setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
         
@@ -166,6 +167,21 @@
     [PFUser logInWithFacebook:permissionsArray block:^(PFUser *user, NSError *error) {
         [self _updateLoginButton];
     }];
+}
+
+#pragma mark UITableViewDelegate
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+	CGFloat height	=	0;
+	
+	id object  =  [(NITableViewModel*)[tableView dataSource] objectAtIndexPath:indexPath];
+	id class	=	[object cellClass];
+	if ([class respondsToSelector:@selector(heightForObject:atIndexPath:tableView:)]){
+		height	=	[class heightForObject:object atIndexPath:indexPath tableView:tableView];
+	}
+	return height;
+}
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+	
 }
 
 @end
