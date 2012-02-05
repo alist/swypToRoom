@@ -17,26 +17,30 @@
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        
         // Initialization code
 		UIView * bgView		=	[[UIView alloc] initWithFrame:self.bounds];
         bgView.backgroundColor = [UIColor clearColor];
 		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectMake(0, 0, 100, 100)];
 		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
-		[bgView addSubview:self.nwImgView];
+		[self addSubview:self.nwImgView];
 
 		self.nameLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
+        self.nameLabel.highlightedTextColor = [UIColor whiteColor];
 		[self.nameLabel setTextAlignment:UITextAlignmentLeft];
 		[self.nameLabel setFont:[UIFont fontWithName:@"futura" size:16]];
-		self.nameLabel.frame	=	CGRectMake(120, 20, 200, 20);
+		self.nameLabel.frame	=	CGRectMake(120, 30, 200, 20);
 		[self.nameLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-		[bgView addSubview:self.nameLabel];
+		[self addSubview:self.nameLabel];
 
 		self.dateLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
+        self.dateLabel.highlightedTextColor = [UIColor whiteColor];
 		[self.dateLabel setTextAlignment:UITextAlignmentLeft];
 		[self.dateLabel setFont:[UIFont fontWithName:@"futura" size:14]];
-		self.dateLabel.frame	=	CGRectMake(120, 48, 200, 20);
+		self.dateLabel.frame	=	CGRectMake(120, 54, 200, 20);
 		[self.dateLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-		[bgView addSubview:self.dateLabel];
+		[self addSubview:self.dateLabel];
 		
 		[self setBackgroundView:bgView];
     }
