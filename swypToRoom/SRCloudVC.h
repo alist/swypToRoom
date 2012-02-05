@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @interface SRCloudVC : UIViewController <UITableViewDelegate>
-@property (nonatomic,  strong) MKMapView*	map;
+@property (nonatomic,  strong) MKMapView*	mapBG;
+@property (nonatomic,  strong) UITableView*	swypRoomContentTV;
 
 @end
