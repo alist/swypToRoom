@@ -68,7 +68,8 @@
         pasteboardItems = pasteBoard.items;
         if (pasteBoard.image) {
             NSData *imageData = UIImagePNGRepresentation(pasteBoard.image);
-            [cloudVC.outgoingDataManager addObjectWithIcon:pasteBoard.image mimeSwypFileType:@"image/png" objectData:imageData];
+            UIImage* icon = [cloudVC.outgoingDataManager _generateIconImageForImageData:imageData maxSize:CGSizeMake(350, 350)];
+            [cloudVC.outgoingDataManager addObjectWithIcon:icon mimeSwypFileType:@"image/png" objectData:imageData];
         } 
         if (pasteBoard.string || pasteBoard.URL) {
             NSString* str;
