@@ -12,6 +12,7 @@
 		3E1353E914DE4FCB002601F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1353E714DE4FC5002601F0 /* CoreLocation.framework */; };
 		3E4D0BD514DE53C100673CE4 /* SROutgoingDataManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */; };
 		3E4D0BD614DE53C100673CE4 /* SROutgoingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */; };
+		3E4D0BEB14DE88FC00673CE4 /* NSDate+Relative.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E4D0BEA14DE88FC00673CE4 /* NSDate+Relative.m */; };
 		3EC3F0D014DE21B200BAFD1A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3F0CF14DE21B200BAFD1A /* Parse.framework */; };
 		3EC3F0DA14DE221500BAFD1A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3F0D814DE220800BAFD1A /* QuartzCore.framework */; };
 		3EC3F0DB14DE221500BAFD1A /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3F0D614DE21F900BAFD1A /* libz.1.1.3.dylib */; };
@@ -100,6 +101,8 @@
 		3E1353E414DE3F74002601F0 /* FileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
 		3E1353E514DE3F74002601F0 /* FileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCell.m; sourceTree = "<group>"; };
 		3E1353E714DE4FC5002601F0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3E4D0BE914DE88FC00673CE4 /* NSDate+Relative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Relative.h"; sourceTree = "<group>"; };
+		3E4D0BEA14DE88FC00673CE4 /* NSDate+Relative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Relative.m"; sourceTree = "<group>"; };
 		3EC3F0CF14DE21B200BAFD1A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		3EC3F0D214DE21D100BAFD1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3EC3F0D414DE21E700BAFD1A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -296,6 +299,8 @@
 				7932E77E14DE2DB900E1A017 /* Logic  */,
 				7932E6B414DE1CD000E1A017 /* Supporting Files */,
 				7932E73B14DE226F00E1A017 /* Resources */,
+				3E4D0BE914DE88FC00673CE4 /* NSDate+Relative.h */,
+				3E4D0BEA14DE88FC00673CE4 /* NSDate+Relative.m */,
 			);
 			path = swypToRoom;
 			sourceTree = "<group>";
@@ -609,6 +614,7 @@
 				3E1353E614DE3F74002601F0 /* FileCell.m in Sources */,
 				7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */,
 				79350A9014DE884100F2243C /* SavedRoomObject.m in Sources */,
+				3E4D0BEB14DE88FC00673CE4 /* NSDate+Relative.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
