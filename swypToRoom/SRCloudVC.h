@@ -11,6 +11,7 @@
 #import "SROutgoingDataManager.h"
 
 @interface SRCloudVC : UIViewController <UITableViewDelegate>
+
 @property (nonatomic,  strong) MKMapView*	mapBG;
 @property (nonatomic,  strong) UITableView*	swypRoomContentTV;
 @property (nonatomic, strong) UIButton *	swypActivateButton;

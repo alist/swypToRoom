@@ -22,8 +22,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[SRCloudVC alloc] init]];
-    
+    cloudVC = [[SRCloudVC alloc] init]; 
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cloudVC];
+    cloudVC.outgoingDataManager = [[SROutgoingDataManager alloc] init];
+    [cloudVC.swypWorkspace setContentDataSource:cloudVC.outgoingDataManager];
     [Parse setFacebookApplicationId:@"102637969864294"];
     
 	[self.window setRootViewController:navController];
@@ -54,6 +56,19 @@
 	/*
 	 Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 	 */
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    NSArray* pasteboardItems; 
+    if (!pasteboardItems || ![pasteboardItems isEqualToArray:pasteBoard.items]) {
+        pasteboardItems = pasteBoard.items;
+        if (pasteBoard.image) {
+            NSData *imageData = UIImagePNGRepresentation(pasteBoard.image);
+            [cloudVC.outgoingDataManager addObjectWithIcon:pasteBoard.image mimeSwypFileType:@"image/png" objectData:imageData];
+        } 
+//        else if (pasteBoard.URL) {
+//            textView.text = [pasteBoard.URL absoluteString];
+//        } else if (pasteBoard.string) {
+//        }    
+    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

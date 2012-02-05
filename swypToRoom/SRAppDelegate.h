@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SRCloudVC.h"
 
-@interface SRAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SRAppDelegate : UIResponder <UIApplicationDelegate> {
+    SRCloudVC* cloudVC;
+}
+
 
 @property (strong, nonatomic) UIWindow *window;
 
