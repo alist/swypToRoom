@@ -30,6 +30,8 @@
 	[newObject setObjectUTI:[interactionController UTI]];
 	[newObject setObjectData:[NSData dataWithContentsOfURL:documentURL options:NSDataReadingMappedIfSafe error:nil]];
 	[_outgoingObjectsByID setValue:newObject forKey:[self _generateUniqueContentID]];
+
+	[_datasourceDelegate datasourceSignificantlyModifiedContent:self];
 }
 
 
@@ -87,6 +89,17 @@
 
 -(void)	yieldedData:(NSData*)streamData discernedStream:(swypDiscernedInputStream*)discernedStream inConnectionSession:(swypConnectionSession*)session{
 	EXOLog(@" datasource received data of type: %@",[discernedStream streamType]);
+	
+	if ([[discernedStream streamType] isFileType:[NSString imageJPEGFileType]] || [[discernedStream streamType] isFileType:[NSString imagePNGFileType]]){
+		SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
+		[newObject setObjectIcon:[self _generateIconImageForImageData:streamData maxSize:CGSizeMake(200, 200)]]; 
+		[newObject setObjectUTI:[discernedStream streamType]];
+		[newObject setObjectData:streamData];
+		[_outgoingObjectsByID setValue:newObject forKey:[self _generateUniqueContentID]];
+		
+		[_datasourceDelegate datasourceSignificantlyModifiedContent:self];
+	}
+	
 }
 
 #pragma mark - private

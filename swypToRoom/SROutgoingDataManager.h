@@ -23,4 +23,5 @@
 
 //private
 -(NSString*) _generateUniqueContentID;
+-(UIImage*)	_generateIconImageForImageData:(NSData*)imageData maxSize:(CGSize)maxSize;
 @end
