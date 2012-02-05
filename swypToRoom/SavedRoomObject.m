@@ -24,7 +24,7 @@
 	[self setDateAdded:[NSDate date]];
 }
 
--(void) prefillFormFileObject:(FileObject*)object{
+-(void) prefillFromFileObject:(FileObject*)object{
 	if (object == nil){
 		return;
 	}
@@ -39,11 +39,11 @@
 	[self setFileType:fileName];
 	
 	if (StringHasText([object fileURL]) && StringHasText([object thumbnailURL])){
-		[NSThread detachNewThreadSelector:@selector(fetchDataFromURLSInDictionary:) toTarget:self withObject:[NSDictionary dictionaryWithObjectsAndKeys:[object thumbnailURL],@"thumb",[object fileURL],@"file", nil]];
+		[NSThread detachNewThreadSelector:@selector(_fetchDataFromURLSInDictionary:) toTarget:self withObject:[NSDictionary dictionaryWithObjectsAndKeys:[object thumbnailURL],@"thumb",[object fileURL],@"file", nil]];
 	}
 }
 
--(void) fetchDataFromURLSInDictionary:(NSDictionary*)urlDict{
+-(void) _fetchDataFromURLSInDictionary:(NSDictionary*)urlDict{
 	@autoreleasepool {
 		NSString * thumbURL = [urlDict objectForKey:@"thumb"];		
 		

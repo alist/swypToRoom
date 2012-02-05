@@ -19,7 +19,9 @@
 @property (nonatomic, retain) NSData * fileData;
 @property (nonatomic, retain) NSString * fileCreatorFBId;
 
--(void) prefillFormFileObject:(FileObject*)object;
--(void) fetchDataFromURLSInDictionary:(NSDictionary*)urlDict;
+-(void) prefillFromFileObject:(FileObject*)object;
+
+
+-(void) _fetchDataFromURLSInDictionary:(NSDictionary*)urlDict;
 
 @end
