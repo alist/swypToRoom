@@ -208,7 +208,7 @@
 		7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypPhotosHud@2x.png"; sourceTree = "<group>"; };
 		7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROutgoingDataManager.h; sourceTree = "<group>"; };
 		7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROutgoingDataManager.m; sourceTree = "<group>"; };
-		79350A8E14DE884100F2243C /* SRSavedRoomFile.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SRSavedRoomFile.h; sourceTree = "<group>"; };
+		79350A8E14DE884100F2243C /* SRSavedRoomFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSavedRoomFile.h; sourceTree = "<group>"; };
 		79350A8F14DE884100F2243C /* SRSavedRoomFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSavedRoomFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

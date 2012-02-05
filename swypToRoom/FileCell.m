@@ -20,10 +20,13 @@
     if (self) {
         self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         
+        self.backgroundColor = [UIColor clearColor];
+        
         // Initialization code
 		UIView * bgView		=	[[UIView alloc] initWithFrame:self.bounds];
         bgView.backgroundColor = [UIColor clearColor];
 		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectMake(0, 0, 100, 100)];
+        self.nwImgView.backgroundColor = [UIColor clearColor];
 		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
 		[self addSubview:self.nwImgView];
         
@@ -33,12 +36,14 @@
 
 		self.nameLabel			=	[[UILabel alloc] initWithFrame:CGRectMake(120, 30, 200, 20)];
         self.nameLabel.highlightedTextColor = [UIColor whiteColor];
+        self.nameLabel.backgroundColor = [UIColor clearColor];
 		[self.nameLabel setTextAlignment:UITextAlignmentLeft];
 		[self.nameLabel setFont:[UIFont fontWithName:@"futura" size:16]];
 		[self.nameLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
 		[self addSubview:self.nameLabel];
 
 		self.dateLabel			=	[[UILabel alloc] initWithFrame:CGRectMake(120, 8, 192, 20)];
+        self.dateLabel.backgroundColor = [UIColor clearColor];
         self.dateLabel.textColor = [UIColor grayColor];
         self.dateLabel.highlightedTextColor = [UIColor whiteColor];
 		[self.dateLabel setTextAlignment:UITextAlignmentRight];
@@ -47,6 +52,7 @@
 		[self addSubview:self.dateLabel];
         
         self.usernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 52, 200, 20)];
+        self.usernameLabel.backgroundColor = [UIColor clearColor];
         [self.usernameLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
         [self.nameLabel setFont:[UIFont fontWithName:@"futura" size:14]];
         [self addSubview:self.dateLabel];
