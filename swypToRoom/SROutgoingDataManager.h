@@ -21,6 +21,9 @@
 
 -(void) addDocumentFromURL:(NSURL*)documentURL;
 
+///at least 200X200
+-(void) addObjectWithIcon:(UIImage*)iconImage mimeSwypFileType:(NSString*)mime objectData:(NSData*)objectData;
+
 //private
 -(NSString*) _generateUniqueContentID;
 -(UIImage*)	_generateIconImageForImageData:(NSData*)imageData maxSize:(CGSize)maxSize;

@@ -29,11 +29,29 @@
 	[newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] objectAtIndex:0]:nil]; 
 	[newObject setObjectUTI:[interactionController UTI]];
 	[newObject setObjectData:[NSData dataWithContentsOfURL:documentURL options:NSDataReadingMappedIfSafe error:nil]];
-	[_outgoingObjectsByID setValue:newObject forKey:[self _generateUniqueContentID]];
 
-	[_datasourceDelegate datasourceSignificantlyModifiedContent:self];
+	NSString * newId = [self _generateUniqueContentID];
+	[_outgoingObjectsByID setValue:newObject forKey:newId];
+
+	[_datasourceDelegate datasourceInsertedContentWithID:newId withDatasource:self];
 }
 
+-(void) addObjectWithIcon:(UIImage*)iconImage mimeSwypFileType:(NSString*)mime objectData:(NSData*)objectData{
+	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
+	[newObject setObjectIcon:iconImage]; 
+	[newObject setObjectUTI:mime];
+	[newObject setObjectData:objectData];
+	
+	NSString * newId = [self _generateUniqueContentID];
+	[_outgoingObjectsByID setValue:newObject forKey:newId];
+	
+	[_datasourceDelegate datasourceInsertedContentWithID:newId withDatasource:self];
+
+}
+
+-(void) addObjectToRoom:(SRSwypObjectEncapuslation*)object{
+	EXOLog(@"Adding object to room! %@",[object objectUTI]);
+}
 
 
 #pragma mark - delegation
@@ -74,6 +92,14 @@
 	return _datasourceDelegate;
 }
 
+-(void)	contentWithIDWasDraggedOffWorkspace:(NSString*)contentID{
+	EXOLog(@"Dragged content off! %@",contentID);
+	[self addObjectToRoom:[_outgoingObjectsByID objectForKey:contentID]];
+	
+	[_outgoingObjectsByID removeObjectForKey:contentID];
+	[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
+}
+
 #pragma mark swypConnectionSessionDataDelegate
 -(NSArray*)supportedFileTypesForReceipt{
 	return [NSArray arrayWithObjects:[NSString imageJPEGFileType] ,[NSString imagePNGFileType], nil];
@@ -95,9 +121,10 @@
 		[newObject setObjectIcon:[self _generateIconImageForImageData:streamData maxSize:CGSizeMake(200, 200)]]; 
 		[newObject setObjectUTI:[discernedStream streamType]];
 		[newObject setObjectData:streamData];
-		[_outgoingObjectsByID setValue:newObject forKey:[self _generateUniqueContentID]];
 		
-		[_datasourceDelegate datasourceSignificantlyModifiedContent:self];
+		NSString * newId = [self _generateUniqueContentID];
+		[_outgoingObjectsByID setValue:newObject forKey:newId];
+		[_datasourceDelegate datasourceInsertedContentWithID:newId withDatasource:self];
 	}
 	
 }
