@@ -14,7 +14,7 @@
 -(void) viewDidLoad{
 	[super viewDidLoad];
 	
-	_mapBG = [[MKMapView alloc] initWithFrame:self.view.frame];
+	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG showsUserLocation];
 	[_mapBG setUserTrackingMode:MKUserTrackingModeFollowWithHeading];
 	[_mapBG setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
