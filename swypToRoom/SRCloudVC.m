@@ -7,6 +7,7 @@
 //
 
 #import "SRCloudVC.h"
+#import <Parse/Parse.h>
 
 @implementation SRCloudVC
 @synthesize mapBG = _mapBG, swypRoomContentTV = _swypRoomContentTV, swypActivateButton = _swypActivateButton;
