@@ -12,7 +12,7 @@
 
 @implementation FileCell
 @synthesize nwImgView, nameLabel, dateLabel, usernameLabel;
-@synthesize fbImgView;
+@synthesize fbImgView, progressView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -56,6 +56,11 @@
         [self.usernameLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
         [self.nameLabel setFont:[UIFont fontWithName:@"futura" size:14]];
         [self addSubview:self.dateLabel];
+        
+        self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        self.progressView.frame = CGRectMake(120, 76, 180, 20);
+        self.progressView.hidden = YES;
+        [self addSubview:self.progressView];
 		
 		[self setBackgroundView:bgView];
     }
@@ -88,11 +93,13 @@
 	self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]];
     NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] lastObject] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
-    return YES;
 }
 
 - (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object{
 	self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    
+    self.progressView.hidden = (self.progressView.progress == 1) ? YES : NO;
+    [self.progressView setProgress:object.progress animated:YES];
 	
 	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
 

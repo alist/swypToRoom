@@ -17,6 +17,7 @@
 @dynamic thumbnailJPGData;
 @dynamic fileData;
 @dynamic fileCreatorFBId;
+@synthesize progress;
 
 -(void)awakeFromInsert{
 	[super awakeFromInsert];
@@ -41,6 +42,16 @@
 	if (StringHasText([object fileURL]) && StringHasText([object thumbnailURL])){
 		[NSThread detachNewThreadSelector:@selector(_fetchDataFromURLSInDictionary:) toTarget:self withObject:[NSDictionary dictionaryWithObjectsAndKeys:[object thumbnailURL],@"thumb",[object fileURL],@"file", nil]];
 	}
+}
+
+-(void)setThumbnailJPGData:(NSData *)thumbnailJPGData {
+    self.progress = 0.5;
+    _thumbnailJPGData = thumbnailJPGData;
+}
+
+-(void)setFileData:(NSData *)fileData {
+    self.progress = 1.0;
+    _fileData = fileData;
 }
 
 -(void) _fetchDataFromURLSInDictionary:(NSDictionary*)urlDict{
