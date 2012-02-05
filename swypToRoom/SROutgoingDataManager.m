@@ -43,8 +43,9 @@
 }
 
 -(void)prettifyIconForObjectID:(NSString*)objectID fromURL:(NSURL*)url {
-    NSArray* stringArray = [NSArray arrayWithObjects:@"png",@"doc",@"xls",@"xlsx",@"doc",@"docx",@"ppt",@"pptx",@"jpg",@"jpeg",@"gif",@"bmp",@"html", nil];
-    BOOL stringMatch = [stringArray indexOfObjectIdenticalTo:url.pathExtension] != NSNotFound;
+    NSArray* stringArray = [NSArray arrayWithObjects:@"pdf",@"png",@"doc",@"xls",@"xlsx",@"doc",@"docx",@"ppt",@"pptx",@"jpg",@"jpeg",@"gif",@"bmp",@"html", nil];
+    NSLog(@"%@",url.pathExtension);
+    BOOL stringMatch = [stringArray containsObject:url.pathExtension] != NSNotFound;
     SRSwypObjectEncapuslation* object = [_outgoingObjectsByID objectForKey:objectID];
     if (stringMatch) {
         UIWebView* wv = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
