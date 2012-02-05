@@ -12,7 +12,7 @@
 
 @implementation FileCell
 @synthesize nwImgView, nameLabel, dateLabel, usernameLabel;
-@synthesize fbImgView;
+@synthesize fbImgView, progressView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -28,6 +28,7 @@
 		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectMake(0, 0, 100, 100)];
         self.nwImgView.backgroundColor = [UIColor clearColor];
 		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
+        self.nwImgView.contentMode = UIViewContentModeScaleAspectFit;
 		[self addSubview:self.nwImgView];
         
         self.fbImgView = [[NINetworkImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
@@ -56,6 +57,11 @@
         [self.usernameLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
         [self.nameLabel setFont:[UIFont fontWithName:@"futura" size:14]];
         [self addSubview:self.dateLabel];
+        
+        self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        self.progressView.frame = CGRectMake(120, 76, 180, 20);
+        self.progressView.hidden = YES;
+        [self addSubview:self.progressView];
 		
 		[self setBackgroundView:bgView];
     }
@@ -78,13 +84,16 @@
     return YES;
 }
 
+
 - (void)updateCellWithFileObject:(FileObject*)object{
 //	self.accessoryType = UITableViewCellAccessoryNone;
+    
+    self.progressView.hidden = YES;
 	
-	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
+	[self.nwImgView setPathToNetworkImage:[object thumbnailURL]];
     [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fbID]];
-   self.usernameLabel.text = object.fbName;
+    self.usernameLabel.text = object.fbName;
 	self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]];
     NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] lastObject] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
@@ -92,17 +101,19 @@
 
 - (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object{
 //	self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    
+    if (object.progress < 1){
+        [self.progressView setProgress:object.progress animated:YES];
+    }
 	
 	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
-
 	[self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fileCreatorFBId]];
 
-	
 	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object dateAdded] distanceOfTimeInWordsToNow]]];
 	
-	NSString *fileName = [[[[object fileName] componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-	[self.nameLabel setText:[NSString stringWithFormat:@"%@", fileName]];
+	NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
 
 }
 

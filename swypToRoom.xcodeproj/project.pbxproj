@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E0CE16714DEC0D700986C38 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CE16514DEC0D700986C38 /* cloud.png */; };
+		3E0CE16814DEC0D700986C38 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E0CE16614DEC0D700986C38 /* cloud@2x.png */; };
 		3E1353E014DE3E3F002601F0 /* FileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1353DF14DE3E3F002601F0 /* FileObject.m */; };
 		3E1353E614DE3F74002601F0 /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1353E514DE3F74002601F0 /* FileCell.m */; };
 		3E1353E914DE4FCB002601F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1353E714DE4FC5002601F0 /* CoreLocation.framework */; };
@@ -100,6 +102,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E0CE16514DEC0D700986C38 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
+		3E0CE16614DEC0D700986C38 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud@2x.png"; sourceTree = "<group>"; };
 		3E1353DE14DE3E3F002601F0 /* FileObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileObject.h; sourceTree = "<group>"; };
 		3E1353DF14DE3E3F002601F0 /* FileObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileObject.m; sourceTree = "<group>"; };
 		3E1353E414DE3F74002601F0 /* FileCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCell.h; sourceTree = "<group>"; };
@@ -446,6 +450,8 @@
 		7932E73B14DE226F00E1A017 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3E0CE16514DEC0D700986C38 /* cloud.png */,
+				3E0CE16614DEC0D700986C38 /* cloud@2x.png */,
 				7932E75B14DE240200E1A017 /* swypPhotosHud.png */,
 				7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */,
 				7932E73C14DE22AF00E1A017 /* swypBundleResources */,
@@ -599,6 +605,8 @@
 				79527C3414DEABDB003002AF /* swypToRoom-57.png in Resources */,
 				79527C3514DEABDB003002AF /* swypToRoom-72.png in Resources */,
 				79527C3614DEABDB003002AF /* swypToRoom-114.png in Resources */,
+				3E0CE16714DEC0D700986C38 /* cloud.png in Resources */,
+				3E0CE16814DEC0D700986C38 /* cloud@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

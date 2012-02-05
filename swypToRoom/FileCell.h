@@ -19,9 +19,10 @@
 @property (nonatomic, strong) NINetworkImageView * fbImgView;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * dateLabel;
+@property (nonatomic, strong) UILabel * usernameLabel;
+@property (nonatomic, strong) UIProgressView *progressView;
 
 - (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object;
 - (void)updateCellWithFileObject:(FileObject*)object;
-@property (nonatomic, strong) UILabel * usernameLabel;
 
 @end
