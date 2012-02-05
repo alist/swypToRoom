@@ -112,7 +112,7 @@
 	[_swypActivateButton addGestureRecognizer:swipeUpRecognizer];
 
 	[self.view addSubview:_swypActivateButton];
-	
+	    
 	//SO that overlaps don't occur btw button and bottom of TVC
 	[[self swypRoomContentTV] setContentInset:UIEdgeInsetsMake(0, 0, 75, 0)];
 

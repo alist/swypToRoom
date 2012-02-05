@@ -30,7 +30,7 @@
 	UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: documentURL];
     interactionController.delegate = self;
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
-	[newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] objectAtIndex:0]:nil]; 
+	[newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] lastObject]:nil]; 
 	[newObject setObjectName:[documentURL lastPathComponent]];
 	[newObject setObjectUTI:[interactionController UTI]];
 	[newObject setObjectData:[NSData dataWithContentsOfURL:documentURL options:NSDataReadingMappedIfSafe error:nil]];
@@ -43,19 +43,17 @@
 }
 
 -(void)prettifyIconForObjectID:(NSString*)objectID fromURL:(NSURL*)url {
+    NSArray* stringArray = [NSArray arrayWithObjects:@"png",@"doc",@"xls",@"xlsx",@"doc",@"docx",@"ppt",@"pptx",@"jpg",@"jpeg",@"gif",@"bmp",@"html", nil];
+    BOOL stringMatch = [stringArray indexOfObjectIdenticalTo:url.pathExtension] != NSNotFound;
     SRSwypObjectEncapuslation* object = [_outgoingObjectsByID objectForKey:objectID];
-    if ([[url pathExtension] isEqualToString:@"pdf"] || 
-        [[url pathExtension] isEqualToString:@"png"] ||
-        [[url pathExtension] isEqualToString:@"jpg"] ||
-        [[url pathExtension] isEqualToString:@"jpeg"] ||
-        [[url pathExtension] isEqualToString:@"html"]) {
+    if (stringMatch) {
         UIWebView* wv = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
         [wv loadRequest:[NSURLRequest requestWithURL:url]];
         SRAppDelegate* del = (((SRAppDelegate*) [UIApplication sharedApplication].delegate));
         [[del.window.subviews lastObject] addSubview:wv];
         wv.hidden = YES;
-        // 3 seconds seems to be enough to render the webview ;)
-        // Use delegate if you want
+        // 5 seconds seems to be enough to render the webview ;)
+        // tried using delegate but had a problem.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
             wv.hidden = NO;
             UIGraphicsBeginImageContextWithOptions(wv.frame.size, YES, 0);
@@ -72,8 +70,6 @@
         });
     }
 }
-
-
 
 -(void) addObjectWithIcon:(UIImage*)iconImage mimeSwypFileType:(NSString*)mime objectData:(NSData*)objectData{
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
