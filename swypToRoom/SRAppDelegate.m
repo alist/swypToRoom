@@ -23,6 +23,7 @@
 	[self.window setRootViewController:[[SRCloudVC alloc] init]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
