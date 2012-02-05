@@ -37,6 +37,7 @@
 	
 	_swypWorkspace			=	[[swypWorkspaceViewController alloc] init];
 	_outgoingDataManager	=	[[SROutgoingDataManager alloc] init];
+	[_swypWorkspace setContentDataSource:_outgoingDataManager];
 	
 	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG setAlpha:1];
@@ -70,7 +71,7 @@
 	UISwipeGestureRecognizer *swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activateSwypButtonPressed:)];
 	swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
 	[_swypActivateButton addGestureRecognizer:swipeUpRecognizer];
-	
+
 	[self.view addSubview:_swypActivateButton];
 	
 	//SO that overlaps don't occur btw button and bottom of TVC
