@@ -8,7 +8,6 @@
 
 #import "FileObject.h"
 #import "FileCell.h"
-#import <Parse/Parse.h>
 
 @implementation FileObject
 

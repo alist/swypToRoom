@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SRCloudVC.h"
 
-@interface SRAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SRAppDelegate : UIResponder <UIApplicationDelegate> {
+    SRCloudVC* cloudVC;
+    NSArray* pasteboardItems;
+}
+
 
 @property (strong, nonatomic) UIWindow *window;
 
