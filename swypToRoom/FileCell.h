@@ -11,8 +11,11 @@
 #import "NINetworkImageView.h"
 
 @interface FileCell : UITableViewCell <NICell>
+
 @property (nonatomic, strong) NINetworkImageView * nwImgView;
 @property (nonatomic, strong) NINetworkImageView * fbImgView;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic, strong) UILabel * dateLabel;
+@property (nonatomic, strong) UILabel * usernameLabel;
+
 @end
