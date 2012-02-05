@@ -69,6 +69,7 @@
 		7932E75D14DE240200E1A017 /* swypPhotosHud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7932E75B14DE240200E1A017 /* swypPhotosHud.png */; };
 		7932E75E14DE240200E1A017 /* swypPhotosHud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */; };
 		7932E77D14DE268000E1A017 /* liblibSwyp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6D514DE1EF800E1A017 /* liblibSwyp.a */; };
+		7932E78214DE2DED00E1A017 /* SROutgoingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,8 @@
 		7932E74B14DE22AF00E1A017 /* top_curl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_curl@2x.png"; sourceTree = "<group>"; };
 		7932E75B14DE240200E1A017 /* swypPhotosHud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swypPhotosHud.png; sourceTree = "<group>"; };
 		7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypPhotosHud@2x.png"; sourceTree = "<group>"; };
+		7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROutgoingDataManager.h; sourceTree = "<group>"; };
+		7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROutgoingDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +435,8 @@
 			children = (
 				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
 				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
+				7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */,
+				7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */,
 			);
 			name = "Logic ";
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				7932E72E14DE1F4B00E1A017 /* NICellFactory.m in Sources */,
 				7932E72F14DE1F4B00E1A017 /* NIFormCellCatalog.m in Sources */,
 				7932E73014DE1F4B00E1A017 /* NITableViewModel.m in Sources */,
+				7932E78214DE2DED00E1A017 /* SROutgoingDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
