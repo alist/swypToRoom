@@ -294,6 +294,7 @@
 				7932E6CC14DE1EDC00E1A017 /* Linked Framworks */,
 				3EFBAB9214DE3456009AF342 /* Model */,
 				7932E77F14DE2DC200E1A017 /* View Controller */,
+				7932E6CC14DE1EDC00E1A017 /* Linked Framworks */,
 				7932E77E14DE2DB900E1A017 /* Logic  */,
 				7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */,
 				7932E6B414DE1CD000E1A017 /* Supporting Files */,
