@@ -7,13 +7,15 @@
 //
 
 #import "SROutgoingDataManager.h"
+#import <Parse/Parse.h>
 
 @implementation SRSwypObjectEncapuslation
-@synthesize objectData = _objectData, objectUTI = _objectUTI, objectIcon = _objectIcon;
+@synthesize objectData = _objectData, objectUTI = _objectUTI, objectIcon = _objectIcon, objectName = _objectName;
 @end
 
 @implementation SROutgoingDataManager
 @synthesize datasourceDelegate = _datasourceDelegate;
+@synthesize locationManager = _locationManager;
 
 -(id) init{
 	if (self = [super init]){
@@ -27,6 +29,7 @@
     interactionController.delegate = self;
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
 	[newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] objectAtIndex:0]:nil]; 
+	[newObject setObjectName:[documentURL lastPathComponent]];
 	[newObject setObjectUTI:[interactionController UTI]];
 	[newObject setObjectData:[NSData dataWithContentsOfURL:documentURL options:NSDataReadingMappedIfSafe error:nil]];
 
@@ -40,6 +43,7 @@
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
 	[newObject setObjectIcon:iconImage]; 
 	[newObject setObjectUTI:mime];
+	[newObject setObjectName:mime];
 	[newObject setObjectData:objectData];
 	
 	NSString * newId = [self _generateUniqueContentID];
@@ -51,6 +55,21 @@
 
 -(void) addObjectToRoom:(SRSwypObjectEncapuslation*)object{
 	EXOLog(@"Adding object to room! %@",[object objectUTI]);
+	PFObject * newRoomObject	=	[PFObject objectWithClassName:@"RoomObject"];
+	PFFile * objectFile			=	[PFFile fileWithName:[object objectName] data:[object objectData]];
+	[newRoomObject setObject:objectFile forKey:@"file"];
+	PFFile * thumbail			=	[PFFile fileWithData:UIImageJPEGRepresentation([object objectIcon], .9)];
+	[newRoomObject setObject:thumbail forKey:@"thumbnail"];
+	CLLocation * lastLocation	=	[[self locationManager] location];
+	PFGeoPoint * thisGeo		=	[PFGeoPoint geoPointWithLatitude:lastLocation.coordinate.latitude longitude:lastLocation.coordinate.latitude];
+	[objectFile setValue:thisGeo forKey:@"location"];
+	[newRoomObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+		if (succeeded){
+			EXOLog(@"Uploaded successfully of type %@!", [object objectName]);
+		}else{
+			EXOLog(@"Failed upload of %@ with error %@", [object objectName], [error description]);
+		}
+	}];
 }
 
 
@@ -121,6 +140,7 @@
 		[newObject setObjectIcon:[self _generateIconImageForImageData:streamData maxSize:CGSizeMake(200, 200)]]; 
 		[newObject setObjectUTI:[discernedStream streamType]];
 		[newObject setObjectData:streamData];
+		[newObject setObjectName:[discernedStream streamType]];
 		
 		NSString * newId = [self _generateUniqueContentID];
 		[_outgoingObjectsByID setValue:newObject forKey:newId];

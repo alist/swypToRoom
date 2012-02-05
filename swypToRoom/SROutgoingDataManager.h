@@ -7,17 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface SRSwypObjectEncapuslation : NSObject
 @property (nonatomic, strong) NSData *	objectData;
 @property (nonatomic, strong) UIImage *	objectIcon;
 @property (nonatomic, strong) NSString*	objectUTI;
+@property (nonatomic, strong) NSString*	objectName;
+
 @end
 
 @interface SROutgoingDataManager : NSObject <swypContentDataSourceProtocol, swypConnectionSessionDataDelegate,UIDocumentInteractionControllerDelegate>{
 	NSMutableDictionary * _outgoingObjectsByID; //SRSwypObjectEncapuslation(s)
 }
 @property (nonatomic, weak)	id<swypContentDataSourceDelegate> datasourceDelegate;
+@property (nonatomic, strong) CLLocationManager * locationManager;
 
 -(void) addDocumentFromURL:(NSURL*)documentURL;
 
