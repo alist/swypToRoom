@@ -110,7 +110,7 @@
     
     _swypRoomContentTV		=	[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
 	[_swypRoomContentTV setDelegate:self];
-	[_swypRoomContentTV setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.85]];
+	[_swypRoomContentTV setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.75]];
 	[_swypRoomContentTV setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
         
 	[self.view addSubview:_swypRoomContentTV];
