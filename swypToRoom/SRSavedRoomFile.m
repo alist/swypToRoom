@@ -36,12 +36,6 @@
 	if ([components count] == 2){
 		fileType	=	[[components objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
 
-//		NSArray * possibleComponents =	[fileType componentsSeparatedByString:@"/"];
-//		if ([possibleComponents count] > 1){
-//			fileType = [possibleComponents objectAtIndex:1];
-//		}
-		
-//		[self setFileName:[[components objectAtIndex:0] stringByAppendingFormat:@".%@",fileType]];
 	} 
 	[self setFileType:fileType];
 	

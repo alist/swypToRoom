@@ -251,13 +251,19 @@
 
 		if (documentControl == nil){
 			
+			NSString * mime = [oldRoomObject fileType];
+			if ([mime isEqualToString:@"pdf"]){
+				mime = @"application/pdf";
+			}
+
 			UIViewController * viewToWrapWebView = [[UIViewController alloc] init];
 			[viewToWrapWebView setTitle:LocStr(@"File View",@"quickviewed")];
 			UIWebView * webView = [UIWebView new];
 			[webView setScalesPageToFit:TRUE];
 			[viewToWrapWebView setView:webView];
 			[webView sizeToFit];
-			[webView loadData:[oldRoomObject fileData] MIMEType:[oldRoomObject fileType] textEncodingName:@"utf-8" baseURL:nil];
+			
+			[webView loadData:[oldRoomObject fileData] MIMEType:mime textEncodingName:@"utf-8" baseURL:nil];
 
 			[[self navigationController] pushViewController:viewToWrapWebView animated:TRUE];
 						
