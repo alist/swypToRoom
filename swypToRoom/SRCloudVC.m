@@ -98,6 +98,8 @@
 	_outgoingDataManager	=	[[SROutgoingDataManager alloc] init];
 	[_outgoingDataManager setLocationManager:[self locationManager]];
 	[_swypWorkspace setContentDataSource:_outgoingDataManager];
+    
+    ((swypWorkspaceView *)_swypWorkspace.view).backgroundView.backgroundColor = [UIColor colorWithRed:39.0/255 green:188.0/255 blue:1.0 alpha:1];
 	
 	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG setAlpha:1];
@@ -152,6 +154,20 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     self.title = @"Swyp to Room";
+    
+    UIView *cloudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 60)];
+    cloudView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cloud"]];
+    cloudView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [_swypWorkspace.view addSubview:cloudView];
+    UIView *extraCloudView = [[UIView alloc] initWithFrame:CGRectMake(-64, -10, self.view.width*2, 60)];
+    extraCloudView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cloud"]];
+    extraCloudView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [cloudView addSubview:extraCloudView];
+    
+    [UIView animateWithDuration:5 delay:0 options:(UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse) animations:^{
+        cloudView.transform = CGAffineTransformMakeTranslation(120, -5);
+        extraCloudView.transform = CGAffineTransformMakeTranslation(-120, 5);
+    } completion:NULL];
     
     [self _updateLoginButton];
 }
