@@ -9,6 +9,7 @@
 #import "SRCloudVC.h"
 #import <Parse/Parse.h>
 #import "FileObject.h"
+#import "SavedRoomObject.h"
 
 @implementation SRCloudVC
 
@@ -17,6 +18,7 @@
 @synthesize locationManager = _locationManager;
 @synthesize sectionedDataModel = _sectionedDataModel;
 @synthesize fetchedRoomObjects = _fetchedRoomObjects;
+@synthesize resultsController = _resultsController;
 
 @synthesize objectContext = _objectContext;
 
@@ -35,8 +37,12 @@
 	if (_sectionedDataModel == nil){
 		NSMutableArray	* sectionArray	=	[[NSMutableArray alloc] init];
 		
-		[sectionArray addObject:LocStr(@"Nearby files", @"on main file screen")];
+		[sectionArray addObject:LocStr(@"nearby files", @"on main file screen")];
 		[sectionArray addObjectsFromArray:[self fetchedRoomObjects]];
+		[sectionArray addObject:LocStr(@"downloaded files",@"On main view for people to view stuff received")];
+		NSArray	* historyItems			= [[self resultsController] fetchedObjects];
+		[sectionArray addObjectsFromArray:historyItems];
+
 		_sectionedDataModel	=	[[NITableViewModel alloc] initWithSectionedArray:sectionArray delegate:(id)[NICellFactory class]];
 	}
 	return _sectionedDataModel;
@@ -63,10 +69,15 @@
 -(void) setFetchedRoomObjects:(NSArray *)fetchedRoomObjects{
 	_fetchedRoomObjects = fetchedRoomObjects;
 	if (_fetchedRoomObjects){
-		_sectionedDataModel = nil;
-		[[self swypRoomContentTV] setDataSource:[self sectionedDataModel]];
-		[[self swypRoomContentTV] reloadData];
+		[self reloadTableData];
 	}
+}
+
+-(void) reloadTableData{
+	_sectionedDataModel = nil;
+	[[self swypRoomContentTV] setDataSource:[self sectionedDataModel]];
+	[[self swypRoomContentTV] reloadData];
+
 }
 
 -(void) fetchItemsInBackground {
@@ -123,11 +134,16 @@
 	
 	//SO that overlaps don't occur btw button and bottom of TVC
 	[[self swypRoomContentTV] setContentInset:UIEdgeInsetsMake(0, 0, 75, 0)];
-
-    [NSTimer scheduledTimerWithTimeInterval:3 
-                                    target:self 
-                                selector:@selector(fetchItemsInBackground) 
-                                userInfo:nil repeats:YES];
+	
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self  selector:@selector(fetchItemsInBackground) userInfo:nil repeats:YES];
+	
+	NSError *error = nil;
+	[[self resultsController] performFetch:&error];
+	if (error != nil){
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		[NSException exceptionWithName:[error domain] reason:[error description] userInfo:nil];
+	}	
+	[self reloadTableData];
 }
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
@@ -193,8 +209,60 @@
 	return height;
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
+	if (indexPath.section == 0){
+		//instantiate a download
+		SavedRoomObject * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomObject" inManagedObjectContext:[self objectContext]];
+		[newRoomObject prefillFromFileObject:[(NITableViewModel*)[tableView dataSource] objectAtIndexPath:indexPath]];
+	}
 }
+
+#pragma mark NSFetchedResultsController
+
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
+}
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller{
+	[self reloadTableData];
+}
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath{
+	
+    if (type == NSFetchedResultsChangeInsert){
+		//		[_swypHistoryTableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }else if (type == NSFetchedResultsChangeMove){
+	}else if (type == NSFetchedResultsChangeUpdate){
+	}else if (type == NSFetchedResultsChangeDelete){
+	}
+}
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type{
+}
+
+-(NSFetchRequest*)	_newOrUpdatedFetchRequest{
+	NSFetchRequest* request = nil;
+	request = _resultsController.fetchRequest;
+	
+	if (request == nil){
+		NSEntityDescription *requestEntity =	[NSEntityDescription entityForName:@"SavedRoomObject" inManagedObjectContext:_objectContext];
+		
+		request = [[NSFetchRequest alloc] init];
+		[request setEntity:requestEntity];
+		[request setFetchLimit:20];
+	}
+	
+	NSSortDescriptor *dateSortOrder = [[NSSortDescriptor alloc] initWithKey:@"dateAdded" ascending:FALSE];
+	[request setSortDescriptors:[NSArray arrayWithObjects:dateSortOrder, nil]];
+	
+	return request;
+}
+-(NSFetchedResultsController*)resultsController{
+	if (_resultsController == nil){
+		NSFetchRequest *request = [self _newOrUpdatedFetchRequest];
+		_resultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:_objectContext sectionNameKeyPath:nil cacheName:nil];
+		[_resultsController setDelegate:self];
+	}
+	return _resultsController;
+}
+
+
 
 @end

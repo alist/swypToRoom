@@ -23,12 +23,11 @@
 @interface FileObject : NSObject <NICellObject>
 
 @property (nonatomic, strong) NSString *fileName;
-@property (nonatomic, strong) NSDate * uploadTime;
+@property (nonatomic, strong) NSDate *	uploadTime;
 @property (nonatomic, strong) NSString *fbName;
 @property (nonatomic, strong) NSString *fbID;
 @property (nonatomic, strong) NSString *thumbnailURL;
 @property (nonatomic, strong) NSString *fileURL;
-@property (nonatomic, strong) PFObject *parseObject;
 
 -(id)initWithParseObject:(PFObject *)pObject;
 

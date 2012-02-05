@@ -7,7 +7,7 @@
 //
 
 #import "FileCell.h"
-#import "FileObject.h"
+
 #import "NSDate+Relative.h"
 
 @implementation FileCell
@@ -59,18 +59,38 @@
     // Configure the view for the selected state
 }
 
-- (BOOL)shouldUpdateCellWithObject:(FileObject *)object {
+- (BOOL)shouldUpdateCellWithObject:(id)object {
+	if ([object isKindOfClass:[FileObject class]]){
+		[self updateCellWithFileObject:object];	
+	}else{
+		[self updateCellWithSavedRoomObject:object];
+	}
+    return YES;
+}
+
+- (void)updateCellWithFileObject:(FileObject*)object{
 	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
     [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fbID]];
 	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]]];
-	//find the .
-//	NSArray * fullScreen	=	[[object fileName] ];
+
     NSString *fileName = [[[[object fileName] componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 	[self.nameLabel setText:[NSString stringWithFormat:@"%@", fileName]];
-    return YES;
 }
 
+- (void)updateCellWithSavedRoomObject:(SavedRoomObject*)object{
+	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
+
+	[self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
+                                           object.fileCreatorFBId]];
+
+	
+	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object dateAdded] distanceOfTimeInWordsToNow]]];
+	
+	NSString *fileName = [[[[object fileName] componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	[self.nameLabel setText:[NSString stringWithFormat:@"%@", fileName]];
+
+}
 
 + (CGFloat)heightForObject:(id)object atIndexPath:(NSIndexPath *)indexPath tableView:(UITableView *)tableView{
 	return 100;

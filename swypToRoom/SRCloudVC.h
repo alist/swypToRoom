@@ -12,7 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "NimbusModels.h"
 
-@interface SRCloudVC : UIViewController <UITableViewDelegate, CLLocationManagerDelegate> {
+@interface SRCloudVC : UIViewController <UITableViewDelegate, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate> {
 }
 
 @property (nonatomic,  strong) MKMapView*	mapBG;
@@ -24,7 +24,12 @@
 @property (nonatomic, strong) NSManagedObjectContext * objectContext;
 @property (nonatomic, strong) NITableViewModel * sectionedDataModel;
 @property (nonatomic, strong) NSArray * fetchedRoomObjects;
+@property (nonatomic, strong) NSFetchedResultsController * resultsController;
+
+-(void) reloadTableData;
 
 -(void) _updateLoginButton;
+-(NSFetchRequest*)	_newOrUpdatedFetchRequest;
+
 
 @end
