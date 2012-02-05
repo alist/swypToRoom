@@ -8,6 +8,7 @@
 
 #import "FileCell.h"
 #import "FileObject.h"
+#import "NSDate+Relative.h"
 
 @implementation FileCell
 @synthesize nwImgView, nameLabel, dateLabel;
@@ -18,24 +19,22 @@
     if (self) {
         // Initialization code
 		UIView * bgView		=	[[UIView alloc] initWithFrame:self.bounds];
-		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectInset(bgView.frame, 20, 10)];
-		[self.nwImgView setFrame:CGRectMake(20, 5, 150, 90)];
-		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleRightMargin];
+        bgView.backgroundColor = [UIColor clearColor];
+		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectMake(0, 0, 100, 100)];
+		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
 		[bgView addSubview:self.nwImgView];
 
 		self.nameLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
-		self.nameLabel.size		=	CGSizeMake(100, 40);
-		[self.nameLabel setTextAlignment:UITextAlignmentRight];
-		[self.nameLabel setFont:[UIFont fontWithName:@"futura" size:12]];
-		self.nameLabel.origin	=	CGPointMake(self.width -self.nameLabel.size.width, 10);
+		[self.nameLabel setTextAlignment:UITextAlignmentLeft];
+		[self.nameLabel setFont:[UIFont fontWithName:@"futura" size:16]];
+		self.nameLabel.frame	=	CGRectMake(120, 20, 200, 20);
 		[self.nameLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
 		[bgView addSubview:self.nameLabel];
 
 		self.dateLabel			=	[[UILabel alloc] initWithFrame:CGRectZero];
-		self.dateLabel.size		=	CGSizeMake(100, 40);
-		[self.dateLabel setTextAlignment:UITextAlignmentRight];
-		[self.dateLabel setFont:[UIFont fontWithName:@"futura" size:12]];
-		self.dateLabel.origin	=	CGPointMake(self.width -self.nameLabel.size.width, 60);
+		[self.dateLabel setTextAlignment:UITextAlignmentLeft];
+		[self.dateLabel setFont:[UIFont fontWithName:@"futura" size:14]];
+		self.dateLabel.frame	=	CGRectMake(120, 48, 200, 20);
 		[self.dateLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
 		[bgView addSubview:self.dateLabel];
 		
@@ -53,10 +52,11 @@
 
 - (BOOL)shouldUpdateCellWithObject:(FileObject *)object {
 	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
-	[self.dateLabel setText:[[object uploadTime] description]];
+	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]]];
 	//find the .
 //	NSArray * fullScreen	=	[[object fileName] ];
-	[self.nameLabel setText:[object fileName]];
+    NSString *fileName = [[[[object fileName] componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	[self.nameLabel setText:[NSString stringWithFormat:@"%@", fileName]];
     return YES;
 }
 
