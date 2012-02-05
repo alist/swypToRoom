@@ -9,13 +9,15 @@
 #import "SROutgoingDataManager.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SRAppDelegate.h"
+#import <Parse/Parse.h>
 
 @implementation SRSwypObjectEncapuslation
-@synthesize objectData = _objectData, objectUTI = _objectUTI, objectIcon = _objectIcon;
+@synthesize objectData = _objectData, objectUTI = _objectUTI, objectIcon = _objectIcon, objectName = _objectName;
 @end
 
 @implementation SROutgoingDataManager
 @synthesize datasourceDelegate = _datasourceDelegate;
+@synthesize locationManager = _locationManager;
 
 -(id) init{
 	if (self = [super init]){
@@ -28,9 +30,9 @@
 	UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: documentURL];
     interactionController.delegate = self;
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
-    
-    [newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] lastObject]:nil];
-    [newObject setObjectUTI:[interactionController UTI]];
+	[newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] objectAtIndex:0]:nil]; 
+	[newObject setObjectName:[documentURL lastPathComponent]];
+	[newObject setObjectUTI:[interactionController UTI]];
 	[newObject setObjectData:[NSData dataWithContentsOfURL:documentURL options:NSDataReadingMappedIfSafe error:nil]];
 
 	NSString * newId = [self _generateUniqueContentID];
@@ -77,6 +79,7 @@
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
 	[newObject setObjectIcon:iconImage]; 
 	[newObject setObjectUTI:mime];
+	[newObject setObjectName:[@"file." stringByAppendingString:[mime stringByReplacingOccurrencesOfString:@"/" withString:@"_"]]];
 	[newObject setObjectData:objectData];
 	
 	NSString * newId = [self _generateUniqueContentID];
@@ -88,6 +91,38 @@
 
 -(void) addObjectToRoom:(SRSwypObjectEncapuslation*)object{
 	EXOLog(@"Adding object to room! %@",[object objectUTI]);
+	PFObject * newRoomObject	=	[PFObject objectWithClassName:@"RoomObject"];
+	PFFile * objectFile			=	[PFFile fileWithName:[object objectName] data:[object objectData]];
+	PFFile * thumbail			=	[PFFile fileWithName:@"thumbnail.jpg" data:UIImageJPEGRepresentation([object objectIcon], .9)];
+	CLLocation * lastLocation	=	[[self locationManager] location];
+	PFGeoPoint * thisGeo		=	[PFGeoPoint geoPointWithLatitude:lastLocation.coordinate.latitude longitude:lastLocation.coordinate.latitude];
+	[newRoomObject setObject:thisGeo forKey:@"location"];
+	[newRoomObject setObject:[PFUser currentUser] forKey:@"user"];
+	[newRoomObject setObject:[[PFUser currentUser] facebookId] forKey:@"userFBId"];
+
+	[objectFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+		if (succeeded){
+			[thumbail saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+				if (succeeded){
+					[newRoomObject setObject:objectFile forKey:@"file"];
+					[newRoomObject setObject:thumbail forKey:@"thumbnail"];
+					[newRoomObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+						if (succeeded){
+							EXOLog(@"Uploaded successfully of type %@!", [object objectName]);
+						}else{
+							EXOLog(@"Failed upload of %@ with error %@", [object objectName], [error description]);
+						}
+					}];
+				}else{
+					EXOLog(@"Failed upload thumbail for %@ with error %@", [object objectName], [error description]);
+				}
+			}];
+			
+		}else{
+			EXOLog(@"Failed upload objectFile for %@ with error %@", [object objectName], [error description]);
+		}
+	}];
+	
 }
 
 
@@ -130,11 +165,16 @@
 }
 
 -(void)	contentWithIDWasDraggedOffWorkspace:(NSString*)contentID{
-	EXOLog(@"Dragged content off! %@",contentID);
-	[self addObjectToRoom:[_outgoingObjectsByID objectForKey:contentID]];
-	
-	[_outgoingObjectsByID removeObjectForKey:contentID];
-	[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
+
+	if ([PFUser currentUser] != nil){
+		EXOLog(@"Dragged content off! %@",contentID);
+		[self addObjectToRoom:[_outgoingObjectsByID objectForKey:contentID]];
+		
+		[_outgoingObjectsByID removeObjectForKey:contentID];
+		[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
+	}else{
+		[[[UIAlertView alloc] initWithTitle:LocStr(@"Sign-In Required",@"After content swyp-to-room attempted")  message:LocStr(@"Link your facebook account from the home-screen",@"from the swyp workspace") delegate:nil cancelButtonTitle:LocStr(@"Okay",@"Dismiss alert view") otherButtonTitles:nil] show];
+	}
 }
 
 #pragma mark swypConnectionSessionDataDelegate
@@ -158,6 +198,7 @@
 		[newObject setObjectIcon:[self _generateIconImageForImageData:streamData maxSize:CGSizeMake(200, 200)]]; 
 		[newObject setObjectUTI:[discernedStream streamType]];
 		[newObject setObjectData:streamData];
+		[newObject setObjectName:[@"file." stringByAppendingString:[[discernedStream streamType] stringByReplacingOccurrencesOfString:@"/" withString:@"_"]]];
 		
 		NSString * newId = [self _generateUniqueContentID];
 		[_outgoingObjectsByID setValue:newObject forKey:newId];
@@ -165,6 +206,7 @@
 	}
 	
 }
+
 
 #pragma mark - private
 -(UIImage*)	_generateIconImageForImageData:(NSData*)imageData maxSize:(CGSize)maxSize{

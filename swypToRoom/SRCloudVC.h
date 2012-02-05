@@ -11,10 +11,8 @@
 #import "SROutgoingDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import "NimbusModels.h"
-#import "IncomingDataModel.h"
 
-@interface SRCloudVC : UIViewController <UITableViewDelegate, NITableViewModelDelegate, CLLocationManagerDelegate> {
-    UITableView * _incomingTableView;
+@interface SRCloudVC : UIViewController <UITableViewDelegate, CLLocationManagerDelegate> {
 }
 
 @property (nonatomic,  strong) MKMapView*	mapBG;
@@ -22,8 +20,10 @@
 @property (nonatomic, strong) UIButton *	swypActivateButton;
 @property (nonatomic, strong) swypWorkspaceViewController	* swypWorkspace;
 @property (nonatomic, strong) SROutgoingDataManager *	outgoingDataManager;
-@property (nonatomic, strong) IncomingDataModel *incomingDataModel;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) NITableViewModel * sectionedDataModel;
+@property (nonatomic, strong) NSArray * fetchedRoomObjects;
 
 -(void) _updateLoginButton;
 
