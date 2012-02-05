@@ -18,7 +18,7 @@
 {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        self.accessoryType = UITableViewCellAccessoryNone;
         
         // Initialization code
 		UIView * bgView		=	[[UIView alloc] initWithFrame:self.bounds];
@@ -73,6 +73,8 @@
 }
 
 - (void)updateCellWithFileObject:(FileObject*)object{
+	self.accessoryType = UITableViewCellAccessoryNone;
+	
 	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
     [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fbID]];
@@ -84,6 +86,8 @@
 }
 
 - (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object{
+	self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+	
 	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
 
 	[self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
