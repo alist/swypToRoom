@@ -11,21 +11,24 @@
 
 @implementation SRCloudVC
 @synthesize mapBG = _mapBG, swypRoomContentTV = _swypRoomContentTV, swypActivateButton = _swypActivateButton;
-
+@synthesize swypWorkspace = _swypWorkspace, outgoingDataManager = _outgoingDataManager;
 
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-	if (self = [super initWithNibName:nibNameOrNil bundle:nibNameOrNil]){
+	if (self = [super initWithNibName:nil bundle:nil]){
 		
 	}
 	return self;
 }
 
 -(void) activateSwypButtonPressed:(id)sender{
-	[[swypWorkspaceViewController sharedSwypWorkspace] presentContentWorkspaceAtopViewController:self];
+	[[self swypWorkspace] presentContentWorkspaceAtopViewController:self];
 }
 
 -(void) viewDidLoad{
 	[super viewDidLoad];
+	
+	_swypWorkspace			=	[[swypWorkspaceViewController alloc] init];
+	_outgoingDataManager	=	[[SROutgoingDataManager alloc] init];
 	
 	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG setAlpha:1];

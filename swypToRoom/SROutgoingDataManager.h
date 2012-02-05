@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SROutgoingDataManager : NSObject
+@interface SRSwypObjectEncapuslation : NSObject
+@property (nonatomic, strong) NSData *	objectData;
+@property (nonatomic, strong) UIImage *	objectIcon;
+@property (nonatomic, strong) NSString*	objectUTI;
+@end
 
+@interface SROutgoingDataManager : NSObject <swypContentDataSourceProtocol, swypConnectionSessionDataDelegate,UIDocumentInteractionControllerDelegate>{
+	NSMutableDictionary * _outgoingObjectsByID; //SRSwypObjectEncapuslation(s)
+}
+@property (nonatomic, weak)	id<swypContentDataSourceDelegate> datasourceDelegate;
+
+-(void) addDocumentFromURL:(NSURL*)documentURL;
+
+//private
+-(NSString*) _generateUniqueContentID;
 @end
