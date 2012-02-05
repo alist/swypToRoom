@@ -20,7 +20,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-	[self.window setRootViewController:[[SRCloudVC alloc] init]];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[SRCloudVC alloc] init]];
+    
+	[self.window setRootViewController:navController];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
