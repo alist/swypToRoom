@@ -71,9 +71,7 @@
         if (pasteBoard.string || pasteBoard.URL) {
             NSString* str;
             if (pasteBoard.URL) {
-//                str = [pasteBoard.URL absoluteString];
-                [cloudVC.outgoingDataManager addDocumentFromURL:pasteBoard.URL];
-                return;
+                str = [pasteBoard.URL absoluteString];
             } else {
                 str = pasteBoard.string;
             }

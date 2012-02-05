@@ -72,10 +72,10 @@
 		<dict>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.adobe.pdf</string>
+				<string>public.item</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>PDF</string>
+			<string>everything</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
 		</dict>
