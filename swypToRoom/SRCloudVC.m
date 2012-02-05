@@ -6,11 +6,14 @@
 //  Copyright (c) 2012 ExoMachina. All rights reserved.
 //
 
-#import "SRCloudVC.h"
 #import <Parse/Parse.h>
+#import "SRCloudVC.h"
+#import "IncomingDataModel.h"
 
 @implementation SRCloudVC
+
 @synthesize mapBG = _mapBG, swypRoomContentTV = _swypRoomContentTV, swypActivateButton = _swypActivateButton;
+@synthesize incomingDataModel = _incomingDataModel, locationManager = _locationManager;
 
 
 -(void) activateSwypButtonPressed:(id)sender{
@@ -19,6 +22,8 @@
 
 -(void) viewDidLoad{
 	[super viewDidLoad];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
 	
 	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG setAlpha:1];
@@ -28,7 +33,17 @@
 	[self.view addSubview:_mapBG];
 	
 	//add tableview here
-	
+    
+    _incomingTableView		=	[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height) style:UITableViewStylePlain];
+	[_incomingTableView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.85]];
+	[_incomingTableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
+    
+    self.incomingDataModel = [[IncomingDataModel alloc] initWithDelegate:self];
+    
+    [_incomingTableView setDataSource:self.incomingDataModel];
+    [self.view addSubview:_incomingTableView];
+    
+    // activate swyp
 	
 	_swypActivateButton	=	[UIButton buttonWithType:UIButtonTypeCustom];
 	UIImage *	swypActivateImage	=	[UIImage imageNamed:@"swypPhotosHud"];
@@ -55,6 +70,38 @@
     self.title = @"Swyp to Room";
     
     [self _updateLoginButton];
+}
+
+#pragma NIIncomingDataModel delegate methods.
+
+-(UITableViewCell *)tableViewModel:(NITableViewModel *)tableViewModel 
+                  cellForTableView:(UITableView *)tableView 
+                       atIndexPath:(NSIndexPath *)indexPath 
+                        withObject:(id)object {
+    UITableViewCell* cell = [NICellFactory tableViewModel: tableViewModel
+                                         cellForTableView: tableView
+                                              atIndexPath: indexPath
+                                               withObject: object];
+    if (nil == cell){
+        // customize cell creation
+    }
+    return cell;
+}
+
+#pragma Handling Location updates
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation {
+    
+    CLLocationCoordinate2D coord = newLocation.coordinate;
+    PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coord.latitude longitude:coord.longitude];
+    [self.incomingDataModel fetchFilesNear:geoPoint];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error {
+    NSLog(@"Oh shit. %@", error);
 }
 
 
