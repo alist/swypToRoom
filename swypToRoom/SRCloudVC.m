@@ -18,6 +18,8 @@
 @synthesize sectionedDataModel = _sectionedDataModel;
 @synthesize fetchedRoomObjects = _fetchedRoomObjects;
 
+@synthesize objectContext = _objectContext;
+
 -(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
 	if (self = [super initWithNibName:nil bundle:nil]){
 		

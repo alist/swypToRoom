@@ -23,6 +23,7 @@
     // Override point for customization after application launch.
     
     cloudVC = [[SRCloudVC alloc] init]; 
+	[cloudVC setObjectContext:[self managedObjectContext]];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cloudVC];
     [Parse setFacebookApplicationId:@"102637969864294"];
     

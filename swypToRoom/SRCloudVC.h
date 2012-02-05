@@ -21,7 +21,7 @@
 @property (nonatomic, strong) swypWorkspaceViewController	* swypWorkspace;
 @property (nonatomic, strong) SROutgoingDataManager *	outgoingDataManager;
 @property (nonatomic, strong) CLLocationManager *locationManager;
-
+@property (nonatomic, strong) NSManagedObjectContext * objectContext;
 @property (nonatomic, strong) NITableViewModel * sectionedDataModel;
 @property (nonatomic, strong) NSArray * fetchedRoomObjects;
 
