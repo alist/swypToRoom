@@ -42,12 +42,12 @@
 
 -(void) beginFetchingPFItems{
 	@autoreleasepool {
-		
 		PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:self.locationManager.location.coordinate.latitude longitude:self.locationManager.location.coordinate.longitude];
 
 		PFQuery *query = [PFQuery queryWithClassName:@"RoomObject"];
 		[query whereKey:@"location" nearGeoPoint:geoPoint];
 		query.limit = [NSNumber numberWithInt:20];
+		[query orderByDescending:@"createdAt"];
 		
 		NSMutableArray * parseObjectItemArray	=	[NSMutableArray array];
 		for (PFObject *item in [query findObjects]){
@@ -65,6 +65,12 @@
 		[[self swypRoomContentTV] setDataSource:[self sectionedDataModel]];
 		[[self swypRoomContentTV] reloadData];
 	}
+}
+
+-(void) fetchItemsInBackground {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self beginFetchingPFItems];
+    });
 }
 
 -(void) viewDidLoad{
@@ -116,6 +122,10 @@
 	//SO that overlaps don't occur btw button and bottom of TVC
 	[[self swypRoomContentTV] setContentInset:UIEdgeInsetsMake(0, 0, 75, 0)];
 
+    [NSTimer scheduledTimerWithTimeInterval:3 
+                                    target:self 
+                                selector:@selector(fetchItemsInBackground) 
+                                userInfo:nil repeats:YES];
 }
 
 -(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
@@ -181,7 +191,8 @@
 	return height;
 }
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-	
+    
+	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

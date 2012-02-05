@@ -28,7 +28,8 @@
 @property (nonatomic, strong) NSString *fbID;
 @property (nonatomic, strong) NSString *thumbnailURL;
 @property (nonatomic, strong) NSString *fileURL;
+@property (nonatomic, strong) PFObject *parseObject;
 
--(id)initWithParseObject:(PFObject *)parseObject;
+-(id)initWithParseObject:(PFObject *)pObject;
 
 @end
