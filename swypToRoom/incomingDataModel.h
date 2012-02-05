@@ -9,6 +9,17 @@
 #import "NITableViewModel.h"
 #import <Parse/Parse.h>
 
+
+/***
+ Parse object structure of contents:
+ 
+ [parseObject objectForKey:@"user"] -- pfstring
+ [parseObject objectForKey:@"file"] -- pffile
+ [parseObject objectForKey:@"thumbnail"] --pffile
+ [parseObject objectForKey:@"location"] -- pfgeo
+ */
+
+
 @interface IncomingDataModel : NITableViewModel
 
 @property (nonatomic, strong) NSMutableArray *items;
