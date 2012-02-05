@@ -1,0 +1,287 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7932E6AC14DE1CD000E1A017 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6AB14DE1CD000E1A017 /* UIKit.framework */; };
+		7932E6AE14DE1CD000E1A017 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6AD14DE1CD000E1A017 /* Foundation.framework */; };
+		7932E6B014DE1CD000E1A017 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6AF14DE1CD000E1A017 /* CoreGraphics.framework */; };
+		7932E6B214DE1CD000E1A017 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6B114DE1CD000E1A017 /* CoreData.framework */; };
+		7932E6B814DE1CD000E1A017 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7932E6B614DE1CD000E1A017 /* InfoPlist.strings */; };
+		7932E6BA14DE1CD000E1A017 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7932E6B914DE1CD000E1A017 /* main.m */; };
+		7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */; };
+		7932E6C114DE1CD000E1A017 /* swypToRoom.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7932E6A714DE1CD000E1A017 /* swypToRoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swypToRoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7932E6AB14DE1CD000E1A017 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7932E6AD14DE1CD000E1A017 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7932E6AF14DE1CD000E1A017 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7932E6B114DE1CD000E1A017 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7932E6B514DE1CD000E1A017 /* swypToRoom-Info.plist */ = {isa = PBXFileReference; path = "swypToRoom-Info.plist"; sourceTree = "<group>"; };
+		7932E6B714DE1CD000E1A017 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7932E6B914DE1CD000E1A017 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7932E6BB14DE1CD000E1A017 /* swypToRoom-Prefix.pch */ = {isa = PBXFileReference; path = "swypToRoom-Prefix.pch"; sourceTree = "<group>"; };
+		7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */ = {isa = PBXFileReference; path = SRAppDelegate.h; sourceTree = "<group>"; };
+		7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SRAppDelegate.m; sourceTree = "<group>"; };
+		7932E6C014DE1CD000E1A017 /* swypToRoom.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = swypToRoom.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7932E6A414DE1CD000E1A017 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7932E6AC14DE1CD000E1A017 /* UIKit.framework in Frameworks */,
+				7932E6AE14DE1CD000E1A017 /* Foundation.framework in Frameworks */,
+				7932E6B014DE1CD000E1A017 /* CoreGraphics.framework in Frameworks */,
+				7932E6B214DE1CD000E1A017 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7932E69C14DE1CCF00E1A017 = {
+			isa = PBXGroup;
+			children = (
+				7932E6B314DE1CD000E1A017 /* swypToRoom */,
+				7932E6AA14DE1CD000E1A017 /* Frameworks */,
+				7932E6A814DE1CD000E1A017 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7932E6A814DE1CD000E1A017 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6A714DE1CD000E1A017 /* swypToRoom.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7932E6AA14DE1CD000E1A017 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6AB14DE1CD000E1A017 /* UIKit.framework */,
+				7932E6AD14DE1CD000E1A017 /* Foundation.framework */,
+				7932E6AF14DE1CD000E1A017 /* CoreGraphics.framework */,
+				7932E6B114DE1CD000E1A017 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7932E6B314DE1CD000E1A017 /* swypToRoom */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
+				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
+				7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */,
+				7932E6B414DE1CD000E1A017 /* Supporting Files */,
+			);
+			path = swypToRoom;
+			sourceTree = "<group>";
+		};
+		7932E6B414DE1CD000E1A017 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6B514DE1CD000E1A017 /* swypToRoom-Info.plist */,
+				7932E6B614DE1CD000E1A017 /* InfoPlist.strings */,
+				7932E6B914DE1CD000E1A017 /* main.m */,
+				7932E6BB14DE1CD000E1A017 /* swypToRoom-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7932E6A614DE1CD000E1A017 /* swypToRoom */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7932E6C414DE1CD000E1A017 /* Build configuration list for PBXNativeTarget "swypToRoom" */;
+			buildPhases = (
+				7932E6A314DE1CD000E1A017 /* Sources */,
+				7932E6A414DE1CD000E1A017 /* Frameworks */,
+				7932E6A514DE1CD000E1A017 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = swypToRoom;
+			productName = swypToRoom;
+			productReference = 7932E6A714DE1CD000E1A017 /* swypToRoom.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7932E69E14DE1CCF00E1A017 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = ExoMachina;
+			};
+			buildConfigurationList = 7932E6A114DE1CCF00E1A017 /* Build configuration list for PBXProject "swypToRoom" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7932E69C14DE1CCF00E1A017;
+			productRefGroup = 7932E6A814DE1CD000E1A017 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7932E6A614DE1CD000E1A017 /* swypToRoom */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7932E6A514DE1CD000E1A017 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7932E6B814DE1CD000E1A017 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7932E6A314DE1CD000E1A017 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7932E6BA14DE1CD000E1A017 /* main.m in Sources */,
+				7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */,
+				7932E6C114DE1CD000E1A017 /* swypToRoom.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7932E6B614DE1CD000E1A017 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7932E6B714DE1CD000E1A017 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7932E6C214DE1CD000E1A017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7932E6C314DE1CD000E1A017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7932E6C514DE1CD000E1A017 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "swypToRoom/swypToRoom-Prefix.pch";
+				INFOPLIST_FILE = "swypToRoom/swypToRoom-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7932E6C614DE1CD000E1A017 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "swypToRoom/swypToRoom-Prefix.pch";
+				INFOPLIST_FILE = "swypToRoom/swypToRoom-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7932E6A114DE1CCF00E1A017 /* Build configuration list for PBXProject "swypToRoom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7932E6C214DE1CD000E1A017 /* Debug */,
+				7932E6C314DE1CD000E1A017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7932E6C414DE1CD000E1A017 /* Build configuration list for PBXNativeTarget "swypToRoom" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7932E6C514DE1CD000E1A017 /* Debug */,
+				7932E6C614DE1CD000E1A017 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7932E6C014DE1CD000E1A017 /* swypToRoom.xcdatamodel */,
+			);
+			currentVersion = 7932E6C014DE1CD000E1A017 /* swypToRoom.xcdatamodel */;
+			path = swypToRoom.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7932E69E14DE1CCF00E1A017 /* Project object */;
+}
