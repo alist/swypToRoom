@@ -190,6 +190,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+	// add link rec here when not facebook opening
     return [[PFUser facebook] handleOpenURL:url]; 
 }
 
