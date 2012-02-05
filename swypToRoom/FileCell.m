@@ -83,7 +83,7 @@
     return YES;
 }
 
-- (void)updateCellWithSavedRoomObject:(SavedRoomObject*)object{
+- (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object{
 	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
 
 	[self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 

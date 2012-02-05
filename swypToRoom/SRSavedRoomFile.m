@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 ExoMachina. All rights reserved.
 //
 
-#import "SavedRoomObject.h"
+#import "SRSavedRoomFile.h"
+#import "FileCell.h"
 
-
-@implementation SavedRoomObject
+@implementation SRSavedRoomFile
 
 @dynamic fileName;
 @dynamic fileType;
@@ -58,6 +58,14 @@
 			[self performSelectorOnMainThread:@selector(setFileData:) withObject:downloadedFileData waitUntilDone:TRUE];
 		}
 	}
+}
+
+-(UITableViewCellStyle)cellStyle {
+    return UITableViewCellStyleSubtitle;
+}
+
+-(Class)cellClass {
+    return [FileCell class];
 }
 
 @end

@@ -75,7 +75,7 @@
 		7932E75D14DE240200E1A017 /* swypPhotosHud.png in Resources */ = {isa = PBXBuildFile; fileRef = 7932E75B14DE240200E1A017 /* swypPhotosHud.png */; };
 		7932E75E14DE240200E1A017 /* swypPhotosHud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */; };
 		7932E77D14DE268000E1A017 /* liblibSwyp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6D514DE1EF800E1A017 /* liblibSwyp.a */; };
-		79350A9014DE884100F2243C /* SavedRoomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 79350A8F14DE884100F2243C /* SavedRoomObject.m */; };
+		79350A9014DE884100F2243C /* SRSavedRoomFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 79350A8F14DE884100F2243C /* SRSavedRoomFile.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,8 +208,8 @@
 		7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypPhotosHud@2x.png"; sourceTree = "<group>"; };
 		7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROutgoingDataManager.h; sourceTree = "<group>"; };
 		7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROutgoingDataManager.m; sourceTree = "<group>"; };
-		79350A8E14DE884100F2243C /* SavedRoomObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedRoomObject.h; sourceTree = "<group>"; };
-		79350A8F14DE884100F2243C /* SavedRoomObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedRoomObject.m; sourceTree = "<group>"; };
+		79350A8E14DE884100F2243C /* SRSavedRoomFile.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SRSavedRoomFile.h; sourceTree = "<group>"; };
+		79350A8F14DE884100F2243C /* SRSavedRoomFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSavedRoomFile.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,8 +465,8 @@
 			isa = PBXGroup;
 			children = (
 				7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */,
-				79350A8E14DE884100F2243C /* SavedRoomObject.h */,
-				79350A8F14DE884100F2243C /* SavedRoomObject.m */,
+				79350A8E14DE884100F2243C /* SRSavedRoomFile.h */,
+				79350A8F14DE884100F2243C /* SRSavedRoomFile.m */,
 				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
 				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
 				7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */,
@@ -613,7 +613,7 @@
 				3E1353E014DE3E3F002601F0 /* FileObject.m in Sources */,
 				3E1353E614DE3F74002601F0 /* FileCell.m in Sources */,
 				7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */,
-				79350A9014DE884100F2243C /* SavedRoomObject.m in Sources */,
+				79350A9014DE884100F2243C /* SRSavedRoomFile.m in Sources */,
 				3E4D0BEB14DE88FC00673CE4 /* NSDate+Relative.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

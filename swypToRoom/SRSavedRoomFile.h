@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "FileObject.h"
 
-@interface SavedRoomObject : NSManagedObject <NICellObject>
+@interface SRSavedRoomFile : NSManagedObject <NICellObject>
 
 @property (nonatomic, retain) NSString * fileName;
 @property (nonatomic, retain) NSString * fileType;

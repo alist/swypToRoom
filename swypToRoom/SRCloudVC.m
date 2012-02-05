@@ -9,7 +9,7 @@
 #import "SRCloudVC.h"
 #import <Parse/Parse.h>
 #import "FileObject.h"
-#import "SavedRoomObject.h"
+#import "SRSavedRoomFile.h"
 
 @implementation SRCloudVC
 
@@ -212,7 +212,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	if (indexPath.section == 0){
 		//instantiate a download
-		SavedRoomObject * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomObject" inManagedObjectContext:[self objectContext]];
+		SRSavedRoomFile * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomObject" inManagedObjectContext:[self objectContext]];
 		[newRoomObject prefillFromFileObject:[(NITableViewModel*)[tableView dataSource] objectAtIndexPath:indexPath]];
 	}
 }
