@@ -214,6 +214,7 @@
 		//instantiate a download
 		SRSavedRoomFile * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomFile" inManagedObjectContext:[self objectContext]];
 		[newRoomObject prefillFromFileObject:[(NITableViewModel*)[tableView dataSource] objectAtIndexPath:indexPath]];
+		[[self swypRoomContentTV] scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:TRUE];
 	}
 }
 

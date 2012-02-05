@@ -162,7 +162,7 @@
 
 -(void)	contentWithIDWasDraggedOffWorkspace:(NSString*)contentID{
 
-	if ([PFUser currentUser] != nil){
+	if (StringHasText([[PFUser currentUser] facebookId])){
 		EXOLog(@"Dragged content off! %@",contentID);
 		[self addObjectToRoom:[_outgoingObjectsByID objectForKey:contentID]];
 		
@@ -170,6 +170,9 @@
 		[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
 	}else{
 		[[[UIAlertView alloc] initWithTitle:LocStr(@"Sign-In Required",@"After content swyp-to-room attempted")  message:LocStr(@"Link your facebook account from the home-screen",@"from the swyp workspace") delegate:nil cancelButtonTitle:LocStr(@"Okay",@"Dismiss alert view") otherButtonTitles:nil] show];
+		[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
+		[_datasourceDelegate datasourceInsertedContentWithID:contentID withDatasource:self];
+
 	}
 }
 
