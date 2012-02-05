@@ -47,6 +47,7 @@
 		PFQuery *query = [PFQuery queryWithClassName:@"RoomObject"];
 		[query whereKey:@"location" nearGeoPoint:geoPoint];
 		query.limit = [NSNumber numberWithInt:20];
+		[query orderByDescending:@"createdAt"];
 		
 		NSMutableArray * parseObjectItemArray	=	[NSMutableArray array];
 		for (PFObject *item in [query findObjects]){
