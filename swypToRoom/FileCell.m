@@ -28,6 +28,7 @@
 		self.nwImgView		=	[[NINetworkImageView alloc]	initWithFrame:CGRectMake(0, 0, 100, 100)];
         self.nwImgView.backgroundColor = [UIColor clearColor];
 		[self.nwImgView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
+        self.nwImgView.contentMode = UIViewContentModeScaleAspectFit;
 		[self addSubview:self.nwImgView];
         
         self.fbImgView = [[NINetworkImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
@@ -83,13 +84,16 @@
     return YES;
 }
 
+
 - (void)updateCellWithFileObject:(FileObject*)object{
 	self.accessoryType = UITableViewCellAccessoryNone;
+    
+    self.progressView.hidden = YES;
 	
-	[self.nwImgView setPathToNetworkImage:[object thumbnailURL] contentMode:UIViewContentModeScaleAspectFit];
+	[self.nwImgView setPathToNetworkImage:[object thumbnailURL]];
     [self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fbID]];
-   self.usernameLabel.text = object.fbName;
+    self.usernameLabel.text = object.fbName;
 	self.dateLabel.text = [NSString stringWithFormat:@"%@ ago", [[object uploadTime] distanceOfTimeInWordsToNow]];
     NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] lastObject] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
 	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
@@ -98,19 +102,18 @@
 - (void)updateCellWithSavedRoomObject:(SRSavedRoomFile*)object{
 	self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
-    self.progressView.hidden = (self.progressView.progress == 1) ? YES : NO;
-    [self.progressView setProgress:object.progress animated:YES];
+    if (object.progress < 1){
+        [self.progressView setProgress:object.progress animated:YES];
+    }
 	
 	[self.nwImgView setImage:[UIImage imageWithData:[object thumbnailJPGData]]];
-
 	[self.fbImgView setPathToNetworkImage:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", 
                                            object.fileCreatorFBId]];
 
-	
 	[self.dateLabel setText:[NSString stringWithFormat:@"%@ ago", [[object dateAdded] distanceOfTimeInWordsToNow]]];
 	
-	NSString *fileName = [[[[object fileName] componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
-	[self.nameLabel setText:[NSString stringWithFormat:@"%@", fileName]];
+	NSString *fileName = [[[object.fileName componentsSeparatedByString:@"."] objectAtIndex:1] stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+	self.nameLabel.text = [NSString stringWithFormat:@"%@", fileName];
 
 }
 

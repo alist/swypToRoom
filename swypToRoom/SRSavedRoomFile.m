@@ -44,14 +44,15 @@
 	}
 }
 
--(void)setThumbnailJPGData:(NSData *)thumbnailJPGData {
-    self.progress = 0.5;
-    _thumbnailJPGData = thumbnailJPGData;
-}
-
--(void)setFileData:(NSData *)fileData {
-    self.progress = 1.0;
-    _fileData = fileData;
+-(float)getProgress {
+    float theProgress = 0;
+    if (self.thumbnailJPGData){
+        theProgress += 0.5;
+    }
+    if (self.fileData){
+        theProgress += 0.5;
+    }
+    return theProgress;
 }
 
 -(void) _fetchDataFromURLSInDictionary:(NSDictionary*)urlDict{

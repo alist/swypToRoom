@@ -24,8 +24,7 @@
 @property (nonatomic, assign) float progress;
 
 -(void) prefillFromFileObject:(FileObject*)object;
--(void) setThumbnailJPGData:(NSData *)thumbnailJPGData;
--(void) setFileData:(NSData *)fileData;
+-(float)getProgress;
 
 -(void) _fetchDataFromURLSInDictionary:(NSDictionary*)urlDict;
 
