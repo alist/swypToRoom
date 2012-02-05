@@ -155,18 +155,18 @@
 -(void) viewWillAppear:(BOOL)animated {
     self.title = @"Swyp to Room";
     
-    UIView *cloudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 60)];
+    UIView *cloudView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width*2, 64)];
     cloudView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cloud"]];
     cloudView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [_swypWorkspace.view addSubview:cloudView];
-    UIView *extraCloudView = [[UIView alloc] initWithFrame:CGRectMake(-64, -10, self.view.width*2, 60)];
+    UIView *extraCloudView = [[UIView alloc] initWithFrame:CGRectMake(-64, -10, self.view.width*2, 64)];
     extraCloudView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"cloud"]];
     extraCloudView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [cloudView addSubview:extraCloudView];
     
     [UIView animateWithDuration:5 delay:0 options:(UIViewAnimationOptionRepeat|UIViewAnimationOptionAutoreverse) animations:^{
-        cloudView.transform = CGAffineTransformMakeTranslation(120, -5);
-        extraCloudView.transform = CGAffineTransformMakeTranslation(-120, 5);
+        cloudView.transform = CGAffineTransformMakeTranslation(-120, -5);
+        extraCloudView.transform = CGAffineTransformMakeTranslation(120, 5);
     } completion:NULL];
     
     [self _updateLoginButton];
