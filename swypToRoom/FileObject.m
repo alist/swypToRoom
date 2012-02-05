@@ -13,18 +13,18 @@
 
 @synthesize fileName, uploadTime, fbName, fbID, thumbnailURL, fileURL;
 
--(id)initWithParseObject:(PFObject *)parseObject {
+-(id)initWithParseObject:(PFObject *)pObject {
     if (self = [super init]){
-        self.fileName = ((PFFile *)[parseObject objectForKey:@"file"]).name;
-        self.uploadTime = [parseObject updatedAt];
-        self.fbName = ((PFUser *)[parseObject objectForKey:@"user"]).username;
-        self.fbID = [parseObject objectForKey:@"userFBId"];
-
-		PFFile * thumbnail		=	[parseObject objectForKey:@"thumbnail"];
+        self.fileName = ((PFFile *)[pObject objectForKey:@"file"]).name;
+        self.uploadTime = [pObject updatedAt];
+        self.fbName = ((PFUser *)[pObject objectForKey:@"user"]).username;
+        self.fbID = [pObject objectForKey:@"userFBId"];
+				
+		PFFile * thumbnail		=	[pObject objectForKey:@"thumbnail"];
 		NSString * urlForThumb	=	[thumbnail url];
 		self.thumbnailURL		=	urlForThumb;
 
-		PFFile * file			=	[parseObject objectForKey:@"file"];
+		PFFile * file			=	[pObject objectForKey:@"file"];
 		NSString * urlForfile	=	[file url];
 		self.fileURL			=	urlForfile;
 		self.fileName			=	file.name;
