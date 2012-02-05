@@ -61,6 +61,7 @@
 	CLLocation * lastLocation	=	[[self locationManager] location];
 	PFGeoPoint * thisGeo		=	[PFGeoPoint geoPointWithLatitude:lastLocation.coordinate.latitude longitude:lastLocation.coordinate.latitude];
 	[newRoomObject setObject:thisGeo forKey:@"location"];
+	[newRoomObject setObject:[PFUser currentUser] forKey:@"user"];
 
 	[objectFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 		if (succeeded){
@@ -127,11 +128,16 @@
 }
 
 -(void)	contentWithIDWasDraggedOffWorkspace:(NSString*)contentID{
-	EXOLog(@"Dragged content off! %@",contentID);
-	[self addObjectToRoom:[_outgoingObjectsByID objectForKey:contentID]];
-	
-	[_outgoingObjectsByID removeObjectForKey:contentID];
-	[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
+
+	if ([PFUser currentUser] != nil){
+		EXOLog(@"Dragged content off! %@",contentID);
+		[self addObjectToRoom:[_outgoingObjectsByID objectForKey:contentID]];
+		
+		[_outgoingObjectsByID removeObjectForKey:contentID];
+		[_datasourceDelegate datasourceRemovedContentWithID:contentID withDatasource:self];
+	}else{
+		[[[UIAlertView alloc] initWithTitle:LocStr(@"Sign-In Required",@"After content swyp-to-room attempted")  message:LocStr(@"Link your facebook account from the home-screen",@"from the swyp workspace") delegate:nil cancelButtonTitle:LocStr(@"Okay",@"Dismiss alert view") otherButtonTitles:nil] show];
+	}
 }
 
 #pragma mark swypConnectionSessionDataDelegate

@@ -10,6 +10,15 @@
 #import <Parse/Parse.h>
 #import "NimbusModels.h"
 
+/***
+ Parse object structure of contents:
+ 
+ [parseObject objectForKey:@"user"] -- pfstring
+ [parseObject objectForKey:@"file"] -- pffile
+ [parseObject objectForKey:@"thumbnail"] --pffile
+ [parseObject objectForKey:@"location"] -- pfgeo
+ */
+
 @interface FileObject : NSObject <NICellObject>
 
 @property (nonatomic, strong) NSString *fileName;

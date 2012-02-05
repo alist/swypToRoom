@@ -11,7 +11,6 @@
 #import "SROutgoingDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import "NimbusModels.h"
-#import "IncomingDataModel.h"
 
 @interface SRCloudVC : UIViewController <UITableViewDelegate, CLLocationManagerDelegate> {
 }
