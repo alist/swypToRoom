@@ -52,7 +52,8 @@
 	[_incomingTableView setBackgroundColor:[UIColor colorWithWhite:1 alpha:0.85]];
 	[_incomingTableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
     
-    self.incomingDataModel = [[IncomingDataModel alloc] initWithDelegate:self];
+    self.incomingDataModel = [[IncomingDataModel alloc] initWithDelegate:(id)[NICellFactory class]];
+    
     
     [_incomingTableView setDataSource:self.incomingDataModel];
     [self.view addSubview:_incomingTableView];
@@ -87,22 +88,6 @@
     self.title = @"Swyp to Room";
     
     [self _updateLoginButton];
-}
-
-#pragma NIIncomingDataModel delegate methods.
-
--(UITableViewCell *)tableViewModel:(NITableViewModel *)tableViewModel 
-                  cellForTableView:(UITableView *)tableView 
-                       atIndexPath:(NSIndexPath *)indexPath 
-                        withObject:(id)object {
-    UITableViewCell* cell = [NICellFactory tableViewModel: tableViewModel
-                                         cellForTableView: tableView
-                                              atIndexPath: indexPath
-                                               withObject: object];
-    if (nil == cell){
-        // customize cell creation
-    }
-    return cell;
 }
 
 #pragma Handling Location updates

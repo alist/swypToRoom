@@ -26,6 +26,8 @@
         return [self.items objectAtIndex:indexPath.row];
     }
     
+    NSLog(@"requesting object at index path.");
+    
     return nil;
 }
 
