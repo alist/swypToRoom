@@ -76,6 +76,9 @@
 		7932E75E14DE240200E1A017 /* swypPhotosHud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */; };
 		7932E77D14DE268000E1A017 /* liblibSwyp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7932E6D514DE1EF800E1A017 /* liblibSwyp.a */; };
 		79350A9014DE884100F2243C /* SRSavedRoomFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 79350A8F14DE884100F2243C /* SRSavedRoomFile.m */; };
+		79527C3414DEABDB003002AF /* swypToRoom-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 79527C3114DEABDB003002AF /* swypToRoom-57.png */; };
+		79527C3514DEABDB003002AF /* swypToRoom-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 79527C3214DEABDB003002AF /* swypToRoom-72.png */; };
+		79527C3614DEABDB003002AF /* swypToRoom-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 79527C3314DEABDB003002AF /* swypToRoom-114.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +213,9 @@
 		7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROutgoingDataManager.m; sourceTree = "<group>"; };
 		79350A8E14DE884100F2243C /* SRSavedRoomFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSavedRoomFile.h; sourceTree = "<group>"; };
 		79350A8F14DE884100F2243C /* SRSavedRoomFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSavedRoomFile.m; sourceTree = "<group>"; };
+		79527C3114DEABDB003002AF /* swypToRoom-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypToRoom-57.png"; sourceTree = "<group>"; };
+		79527C3214DEABDB003002AF /* swypToRoom-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypToRoom-72.png"; sourceTree = "<group>"; };
+		79527C3314DEABDB003002AF /* swypToRoom-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypToRoom-114.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +314,9 @@
 		7932E6B414DE1CD000E1A017 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				79527C3114DEABDB003002AF /* swypToRoom-57.png */,
+				79527C3214DEABDB003002AF /* swypToRoom-72.png */,
+				79527C3314DEABDB003002AF /* swypToRoom-114.png */,
 				7932E6B514DE1CD000E1A017 /* swypToRoom-Info.plist */,
 				7932E6B614DE1CD000E1A017 /* InfoPlist.strings */,
 				7932E6B914DE1CD000E1A017 /* main.m */,
@@ -570,6 +579,9 @@
 				7932E75A14DE22AF00E1A017 /* top_curl@2x.png in Resources */,
 				7932E75D14DE240200E1A017 /* swypPhotosHud.png in Resources */,
 				7932E75E14DE240200E1A017 /* swypPhotosHud@2x.png in Resources */,
+				79527C3414DEABDB003002AF /* swypToRoom-57.png in Resources */,
+				79527C3514DEABDB003002AF /* swypToRoom-72.png in Resources */,
+				79527C3614DEABDB003002AF /* swypToRoom-114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
