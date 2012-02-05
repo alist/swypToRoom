@@ -51,4 +51,35 @@
 
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    self.title = @"Swyp to Room";
+    
+    [self _updateLoginButton];
+}
+
+
+#pragma Logging in
+
+-(void) _updateLoginButton {
+    if (![PFUser currentUser]){
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log In" style:UIBarButtonItemStyleBordered target:self action:@selector(loginToFacebook)];
+    } else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Log Out" style:UIBarButtonItemStyleDone target:self action:@selector(logOut)];
+    }
+}
+
+-(void) logOut {
+    [PFUser logOut];
+    [self _updateLoginButton];
+}
+
+-(void) loginToFacebook {
+    NSArray *permissionsArray = [NSArray arrayWithObjects:@"user_about_me",
+                                 @"user_relationships", @"user_location", @"offline_access", nil];
+    
+    [PFUser logInWithFacebook:permissionsArray block:^(PFUser *user, NSError *error) {
+        [self _updateLoginButton];
+    }];
+}
+
 @end

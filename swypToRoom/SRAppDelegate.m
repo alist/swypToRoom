@@ -8,6 +8,7 @@
 
 #import "SRAppDelegate.h"
 #import "SRCloudVC.h"
+#import <Parse/Parse.h>
 
 @implementation SRAppDelegate
 
@@ -22,6 +23,8 @@
     // Override point for customization after application launch.
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[SRCloudVC alloc] init]];
+    
+    [Parse setFacebookApplicationId:@"102637969864294"];
     
 	[self.window setRootViewController:navController];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -177,6 +180,17 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma Handling facebook logins / generic url opening.
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [[PFUser facebook] handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[PFUser facebook] handleOpenURL:url]; 
 }
 
 @end
