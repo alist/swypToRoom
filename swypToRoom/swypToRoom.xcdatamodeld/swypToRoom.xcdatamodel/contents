@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="SavedRoomObject" representedClassName="SavedRoomObject" syncable="YES">
+    <entity name="SavedRoomFile" representedClassName="SRSavedRoomFile" syncable="YES">
         <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fileCreatorFBId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fileData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
@@ -9,6 +9,6 @@
         <attribute name="thumbnailJPGData" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SavedRoomObject" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="SavedRoomFile" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>

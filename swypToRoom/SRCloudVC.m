@@ -212,7 +212,7 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:NO];
 	if (indexPath.section == 0){
 		//instantiate a download
-		SRSavedRoomFile * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomObject" inManagedObjectContext:[self objectContext]];
+		SRSavedRoomFile * newRoomObject = [NSEntityDescription insertNewObjectForEntityForName:@"SavedRoomFile" inManagedObjectContext:[self objectContext]];
 		[newRoomObject prefillFromFileObject:[(NITableViewModel*)[tableView dataSource] objectAtIndexPath:indexPath]];
 	}
 }
