@@ -262,10 +262,8 @@
 			isa = PBXGroup;
 			children = (
 				7932E6CC14DE1EDC00E1A017 /* Linked Framworks */,
-				7932E6C714DE1D1800E1A017 /* SRCloudVC.h */,
-				7932E6C814DE1D1800E1A017 /* SRCloudVC.m */,
-				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
-				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
+				7932E77F14DE2DC200E1A017 /* View Controller */,
+				7932E77E14DE2DB900E1A017 /* Logic  */,
 				7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */,
 				7932E6B414DE1CD000E1A017 /* Supporting Files */,
 				7932E73B14DE226F00E1A017 /* Resources */,
@@ -428,6 +426,24 @@
 			name = swypBundleResources;
 			path = swyp/swypBundleResources;
 			sourceTree = SOURCE_ROOT;
+		};
+		7932E77E14DE2DB900E1A017 /* Logic  */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
+				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
+			);
+			name = "Logic ";
+			sourceTree = "<group>";
+		};
+		7932E77F14DE2DC200E1A017 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6C714DE1D1800E1A017 /* SRCloudVC.h */,
+				7932E6C814DE1D1800E1A017 /* SRCloudVC.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
