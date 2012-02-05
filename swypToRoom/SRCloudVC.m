@@ -6,24 +6,37 @@
 //  Copyright (c) 2012 ExoMachina. All rights reserved.
 //
 
-#import <Parse/Parse.h>
 #import "SRCloudVC.h"
 #import "IncomingDataModel.h"
+#import <Parse/Parse.h>
 
 @implementation SRCloudVC
 
 @synthesize mapBG = _mapBG, swypRoomContentTV = _swypRoomContentTV, swypActivateButton = _swypActivateButton;
+@synthesize swypWorkspace = _swypWorkspace, outgoingDataManager = _outgoingDataManager;
 @synthesize incomingDataModel = _incomingDataModel, locationManager = _locationManager;
 
+-(id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+	if (self = [super initWithNibName:nil bundle:nil]){
+		
+	}
+	return self;
+}
 
 -(void) activateSwypButtonPressed:(id)sender{
-	[[swypWorkspaceViewController sharedSwypWorkspace] presentContentWorkspaceAtopViewController:self];
+	[[self swypWorkspace] presentContentWorkspaceAtopViewController:self];
 }
 
 -(void) viewDidLoad{
 	[super viewDidLoad];
     
     self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = 1; // in meters
+    [self.locationManager startUpdatingLocation];
+	
+	_swypWorkspace			=	[[swypWorkspaceViewController alloc] init];
+	_outgoingDataManager	=	[[SROutgoingDataManager alloc] init];
 	
 	_mapBG = [[MKMapView alloc] initWithFrame:self.view.bounds];
 	[_mapBG setAlpha:1];
@@ -48,11 +61,10 @@
 	_swypActivateButton	=	[UIButton buttonWithType:UIButtonTypeCustom];
 	UIImage *	swypActivateImage	=	[UIImage imageNamed:@"swypPhotosHud"];
 	[_swypActivateButton setBackgroundImage:swypActivateImage forState:UIControlStateNormal];
-
-	_swypActivateButton	=	[UIButton buttonWithType:UIButtonTypeCustom];
-    [_swypActivateButton setFrame:CGRectMake(((self.view.width)-_swypActivateButton.size.width)/2, self.view.height-_swypActivateButton.size.height, _swypActivateButton.size.width, _swypActivateButton.size.height)];
+	[_swypActivateButton setSize:[swypActivateImage size]];
 	[_swypActivateButton setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin];
-
+    [_swypActivateButton setFrame:CGRectMake(((self.view.width/2)-_swypActivateButton.size.width/2), self.view.height-_swypActivateButton.size.height, _swypActivateButton.size.width, _swypActivateButton.size.height)];
+	
 	[_swypActivateButton addTarget:self action:@selector(activateSwypButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	
 	UISwipeGestureRecognizer *swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activateSwypButtonPressed:)];
@@ -64,6 +76,10 @@
 	//SO that overlaps don't occur btw button and bottom of TVC
 	[[self swypRoomContentTV] setContentInset:UIEdgeInsetsMake(0, 0, 75, 0)];
 
+}
+
+-(BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+	return YES;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -93,6 +109,8 @@
 - (void)locationManager:(CLLocationManager *)manager
     didUpdateToLocation:(CLLocation *)newLocation
            fromLocation:(CLLocation *)oldLocation {
+    
+    NSLog(@"Updated location.");
     
     CLLocationCoordinate2D coord = newLocation.coordinate;
     PFGeoPoint *geoPoint = [PFGeoPoint geoPointWithLatitude:coord.latitude longitude:coord.longitude];

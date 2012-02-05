@@ -29,6 +29,8 @@
 }
 
 - (void)fetchFilesNear:(PFGeoPoint *)currentLocation{
+    NSLog(@"Fetching files.");
+    
     PFQuery *query = [PFQuery queryWithClassName:@"RoomObject"];
     [query whereKey:@"location" nearGeoPoint:currentLocation];
     query.limit = [NSNumber numberWithInt:20];

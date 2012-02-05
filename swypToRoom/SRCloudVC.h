@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "SROutgoingDataManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import "NimbusModels.h"
 #import "IncomingDataModel.h"
@@ -16,11 +17,13 @@
     UITableView * _incomingTableView;
 }
 
-@property (nonatomic,  strong)  MKMapView*          mapBG;
-@property (nonatomic,  strong)  UITableView*        swypRoomContentTV;
-@property (nonatomic, strong)   UIButton*           swypActivateButton;
-@property (nonatomic, strong)   IncomingDataModel*   incomingDataModel;
-@property (nonatomic, strong)   CLLocationManager*  locationManager;
+@property (nonatomic,  strong) MKMapView*	mapBG;
+@property (nonatomic,  strong) UITableView*	swypRoomContentTV;
+@property (nonatomic, strong) UIButton *	swypActivateButton;
+@property (nonatomic, strong) swypWorkspaceViewController	* swypWorkspace;
+@property (nonatomic, strong) SROutgoingDataManager *	outgoingDataManager;
+@property (nonatomic, strong) IncomingDataModel *incomingDataModel;
+@property (nonatomic, strong) CLLocationManager *locationManager;
 
 -(void) _updateLoginButton;
 

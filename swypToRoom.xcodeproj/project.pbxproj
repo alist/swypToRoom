@@ -10,6 +10,8 @@
 		3E1353E014DE3E3F002601F0 /* FileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1353DF14DE3E3F002601F0 /* FileObject.m */; };
 		3E1353E614DE3F74002601F0 /* FileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1353E514DE3F74002601F0 /* FileCell.m */; };
 		3E1353E914DE4FCB002601F0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1353E714DE4FC5002601F0 /* CoreLocation.framework */; };
+		3E4D0BD514DE53C100673CE4 /* SROutgoingDataManager.h in Sources */ = {isa = PBXBuildFile; fileRef = 7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */; };
+		3E4D0BD614DE53C100673CE4 /* SROutgoingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */; };
 		3EC3F0D014DE21B200BAFD1A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3F0CF14DE21B200BAFD1A /* Parse.framework */; };
 		3EC3F0DA14DE221500BAFD1A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3F0D814DE220800BAFD1A /* QuartzCore.framework */; };
 		3EC3F0DB14DE221500BAFD1A /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EC3F0D614DE21F900BAFD1A /* libz.1.1.3.dylib */; };
@@ -203,6 +205,8 @@
 		7932E74B14DE22AF00E1A017 /* top_curl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "top_curl@2x.png"; sourceTree = "<group>"; };
 		7932E75B14DE240200E1A017 /* swypPhotosHud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swypPhotosHud.png; sourceTree = "<group>"; };
 		7932E75C14DE240200E1A017 /* swypPhotosHud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "swypPhotosHud@2x.png"; sourceTree = "<group>"; };
+		7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SROutgoingDataManager.h; sourceTree = "<group>"; };
+		7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SROutgoingDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,10 +293,8 @@
 			children = (
 				3EFBAB9214DE3456009AF342 /* Model */,
 				7932E6CC14DE1EDC00E1A017 /* Linked Framworks */,
-				7932E6C714DE1D1800E1A017 /* SRCloudVC.h */,
-				7932E6C814DE1D1800E1A017 /* SRCloudVC.m */,
-				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
-				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
+				7932E77F14DE2DC200E1A017 /* View Controller */,
+				7932E77E14DE2DB900E1A017 /* Logic  */,
 				7932E6BF14DE1CD000E1A017 /* swypToRoom.xcdatamodeld */,
 				7932E6B414DE1CD000E1A017 /* Supporting Files */,
 				7932E73B14DE226F00E1A017 /* Resources */,
@@ -456,6 +458,26 @@
 			path = swyp/swypBundleResources;
 			sourceTree = SOURCE_ROOT;
 		};
+		7932E77E14DE2DB900E1A017 /* Logic  */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6BC14DE1CD000E1A017 /* SRAppDelegate.h */,
+				7932E6BD14DE1CD000E1A017 /* SRAppDelegate.m */,
+				7932E78014DE2DED00E1A017 /* SROutgoingDataManager.h */,
+				7932E78114DE2DED00E1A017 /* SROutgoingDataManager.m */,
+			);
+			name = "Logic ";
+			sourceTree = "<group>";
+		};
+		7932E77F14DE2DC200E1A017 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7932E6C714DE1D1800E1A017 /* SRCloudVC.h */,
+				7932E6C814DE1D1800E1A017 /* SRCloudVC.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -553,8 +575,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7932E6BA14DE1CD000E1A017 /* main.m in Sources */,
-				7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */,
 				7932E6C114DE1CD000E1A017 /* swypToRoom.xcdatamodeld in Sources */,
+				3E4D0BD514DE53C100673CE4 /* SROutgoingDataManager.h in Sources */,
+				3E4D0BD614DE53C100673CE4 /* SROutgoingDataManager.m in Sources */,
 				7932E6C914DE1D1800E1A017 /* SRCloudVC.m in Sources */,
 				7932E70614DE1F1A00E1A017 /* NICommonMetrics.m in Sources */,
 				7932E70714DE1F1A00E1A017 /* NIDataStructures.m in Sources */,
@@ -584,6 +607,7 @@
 				3EFBAB9514DE3510009AF342 /* IncomingDataModel.m in Sources */,
 				3E1353E014DE3E3F002601F0 /* FileObject.m in Sources */,
 				3E1353E614DE3F74002601F0 /* FileCell.m in Sources */,
+				7932E6BE14DE1CD000E1A017 /* SRAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
