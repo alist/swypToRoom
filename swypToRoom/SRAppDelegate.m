@@ -24,8 +24,6 @@
     
     cloudVC = [[SRCloudVC alloc] init]; 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:cloudVC];
-    cloudVC.outgoingDataManager = [[SROutgoingDataManager alloc] init];
-    [cloudVC.swypWorkspace setContentDataSource:cloudVC.outgoingDataManager];
     [Parse setFacebookApplicationId:@"102637969864294"];
     
 	[self.window setRootViewController:navController];
@@ -56,19 +54,6 @@
 	/*
 	 Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 	 */
-    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
-    NSArray* pasteboardItems; 
-    if (!pasteboardItems || ![pasteboardItems isEqualToArray:pasteBoard.items]) {
-        pasteboardItems = pasteBoard.items;
-        if (pasteBoard.image) {
-            NSData *imageData = UIImagePNGRepresentation(pasteBoard.image);
-            [cloudVC.outgoingDataManager addObjectWithIcon:pasteBoard.image mimeSwypFileType:@"image/png" objectData:imageData];
-        } 
-//        else if (pasteBoard.URL) {
-//            textView.text = [pasteBoard.URL absoluteString];
-//        } else if (pasteBoard.string) {
-//        }    
-    }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -76,6 +61,35 @@
 	/*
 	 Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 	 */
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    if (!pasteboardItems || ![pasteboardItems isEqualToArray:pasteBoard.items]) {
+        pasteboardItems = pasteBoard.items;
+        if (pasteBoard.image) {
+            NSData *imageData = UIImagePNGRepresentation(pasteBoard.image);
+            [cloudVC.outgoingDataManager addObjectWithIcon:pasteBoard.image mimeSwypFileType:@"image/png" objectData:imageData];
+        } 
+        if (pasteBoard.string || pasteBoard.URL) {
+            NSString* str;
+            if (pasteBoard.URL) {
+                str = ((NSString*)[pasteBoard.URL absoluteURL]);
+            } else {
+                str = pasteBoard.string;
+            }
+            NSData *textData = [str dataUsingEncoding:NSASCIIStringEncoding];
+            UITextView* tv = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+            tv.text = [NSString stringWithFormat:@"\n%@",str]; // Hack around top icon border
+            UIGraphicsBeginImageContext(tv.frame.size);
+            [tv.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            [cloudVC.outgoingDataManager addObjectWithIcon:viewImage mimeSwypFileType:@"text/plain" objectData:textData];
+        }
+        //        else if (pasteBoard.URL) {
+        //            textView.text = [pasteBoard.URL absoluteString];
+        //        } else if (pasteBoard.string) {
+        //        }    
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

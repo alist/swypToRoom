@@ -11,6 +11,7 @@
 
 @interface SRAppDelegate : UIResponder <UIApplicationDelegate> {
     SRCloudVC* cloudVC;
+    NSArray* pasteboardItems;
 }
 
 
