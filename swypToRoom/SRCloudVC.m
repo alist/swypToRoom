@@ -242,7 +242,7 @@
 	request = _resultsController.fetchRequest;
 	
 	if (request == nil){
-		NSEntityDescription *requestEntity =	[NSEntityDescription entityForName:@"SavedRoomObject" inManagedObjectContext:_objectContext];
+		NSEntityDescription *requestEntity =	[NSEntityDescription entityForName:@"SavedRoomFile" inManagedObjectContext:_objectContext];
 		
 		request = [[NSFetchRequest alloc] init];
 		[request setEntity:requestEntity];
