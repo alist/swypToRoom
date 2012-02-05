@@ -29,7 +29,7 @@
 	[self.window setRootViewController:navController];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 
@@ -71,7 +71,9 @@
         if (pasteBoard.string || pasteBoard.URL) {
             NSString* str;
             if (pasteBoard.URL) {
-                str = ((NSString*)[pasteBoard.URL absoluteURL]);
+//                str = [pasteBoard.URL absoluteString];
+                [cloudVC.outgoingDataManager addDocumentFromURL:pasteBoard.URL];
+                return;
             } else {
                 str = pasteBoard.string;
             }
@@ -84,6 +86,7 @@
             UIGraphicsEndImageContext();
             
             [cloudVC.outgoingDataManager addObjectWithIcon:viewImage mimeSwypFileType:@"text/plain" objectData:textData];
+//            [cloudVC.swypWorkspace presentContentWorkspaceAtopViewController:cloudVC]; // Not doing this for now since there's always junk in pasteboard
         }
         //        else if (pasteBoard.URL) {
         //            textView.text = [pasteBoard.URL absoluteString];
@@ -214,13 +217,21 @@
 #pragma Handling facebook logins / generic url opening.
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    // Pre ARC ios versions only; never called.
     return [[PFUser facebook] handleOpenURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-	// add link rec here when not facebook opening
-    return [[PFUser facebook] handleOpenURL:url]; 
+    if ([url isFileURL]) {
+        [cloudVC.outgoingDataManager addDocumentFromURL:url];
+        if (!cloudVC.swypWorkspace.view.superview) {
+            [cloudVC.swypWorkspace presentContentWorkspaceAtopViewController:cloudVC];
+        }
+        return YES;
+    } else {
+        return [[PFUser facebook] handleOpenURL:url];
+    }
 }
 
 @end

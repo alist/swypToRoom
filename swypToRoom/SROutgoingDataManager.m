@@ -7,6 +7,8 @@
 //
 
 #import "SROutgoingDataManager.h"
+#import <QuartzCore/QuartzCore.h>
+#import "SRAppDelegate.h"
 
 @implementation SRSwypObjectEncapuslation
 @synthesize objectData = _objectData, objectUTI = _objectUTI, objectIcon = _objectIcon;
@@ -26,15 +28,50 @@
 	UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL: documentURL];
     interactionController.delegate = self;
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
-	[newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] objectAtIndex:0]:nil]; 
-	[newObject setObjectUTI:[interactionController UTI]];
+    
+    [newObject setObjectIcon:([[interactionController icons] count] > 0)?[[interactionController icons] lastObject]:nil];
+    [newObject setObjectUTI:[interactionController UTI]];
 	[newObject setObjectData:[NSData dataWithContentsOfURL:documentURL options:NSDataReadingMappedIfSafe error:nil]];
 
 	NSString * newId = [self _generateUniqueContentID];
 	[_outgoingObjectsByID setValue:newObject forKey:newId];
-
 	[_datasourceDelegate datasourceInsertedContentWithID:newId withDatasource:self];
+    [self prettifyIconForObjectID:newId fromURL:documentURL];
+
 }
+
+-(void)prettifyIconForObjectID:(NSString*)objectID fromURL:(NSURL*)url {
+    SRSwypObjectEncapuslation* object = [_outgoingObjectsByID objectForKey:objectID];
+    if ([[url pathExtension] isEqualToString:@"pdf"] || 
+        [[url pathExtension] isEqualToString:@"png"] ||
+        [[url pathExtension] isEqualToString:@"jpg"] ||
+        [[url pathExtension] isEqualToString:@"jpeg"] ||
+        [[url pathExtension] isEqualToString:@"html"]) {
+        UIWebView* wv = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+        [wv loadRequest:[NSURLRequest requestWithURL:url]];
+        SRAppDelegate* del = (((SRAppDelegate*) [UIApplication sharedApplication].delegate));
+        [[del.window.subviews lastObject] addSubview:wv];
+        wv.hidden = YES;
+        // 3 seconds seems to be enough to render the webview ;)
+        // Use delegate if you want
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_current_queue(), ^{
+            wv.hidden = NO;
+            UIGraphicsBeginImageContextWithOptions(wv.frame.size, YES, 0);
+            [wv.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            [object setObjectIcon:viewImage];
+            [wv removeFromSuperview];
+            // The right way to do it is make a datasourceUpdatedContentWithID or datasourceUpdatedIconForContent
+            [_outgoingObjectsByID removeObjectForKey:objectID];
+            [_datasourceDelegate datasourceRemovedContentWithID:objectID withDatasource:self];
+            [_outgoingObjectsByID setObject:object forKey:objectID];
+            [_datasourceDelegate datasourceInsertedContentWithID:objectID withDatasource:self];
+        });
+    }
+}
+
+
 
 -(void) addObjectWithIcon:(UIImage*)iconImage mimeSwypFileType:(NSString*)mime objectData:(NSData*)objectData{
 	SRSwypObjectEncapuslation *	newObject = [SRSwypObjectEncapuslation new];
