@@ -14,4 +14,7 @@
 @property (nonatomic,  strong) UITableView*	swypRoomContentTV;
 @property (nonatomic, strong) UIButton *	swypActivateButton;
 
+
+-(void) _updateLoginButton;
+
 @end
